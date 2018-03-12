@@ -55,6 +55,11 @@ $(function () {
             ]
         });
     })
+
+    $('.appset').on('click', '.backlink', function () {
+      AppData.data.backlink = 'aaaaaa'
+      alert(AppData.data.name)
+  })
 })
 
 $(function () {

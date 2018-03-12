@@ -13,6 +13,5 @@ export function totalLayerType(app) {
             }
         }); 
     });
-    console.log(keys);
     return keys;
 }

