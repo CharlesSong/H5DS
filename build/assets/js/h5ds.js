@@ -8480,7 +8480,7 @@ function filterTxt($this) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _promise = __webpack_require__(178);
@@ -8520,250 +8520,254 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * @desc 将AppData里面的 img 单独拿出来
  * @param data 也就是 传入一个 app 对象
-*/
+ */
 function getAppDataImgs(data) {
-    var arr = [];
-    var pages = data.pages;
+  var arr = [];
+  var pages = data.pages;
 
-    if (data.style['background-image']) {
-        arr.push(data.style['background-image']);
+  if (data.style['background-image']) {
+    arr.push(data.style['background-image']);
+  }
+  pages.forEach(function (page) {
+    if (page.style['background-image']) {
+      arr.push(page.style['background-image']);
     }
-    pages.forEach(function (page) {
-        if (page.style['background-image']) {
-            arr.push(page.style['background-image']);
-        }
-        page.layers.forEach(function (layer) {
-            if (layer.type === 'img') {
-                arr.push(layer.data.src);
-            }
-        });
+    page.layers.forEach(function (layer) {
+      if (layer.type === 'img') {
+        arr.push(layer.data.src);
+      }
     });
+  });
 
-    return arr;
+  return arr;
 }
 
 // app 页面的数据
 /**
  * @desc 传入一个 app 对象，生成对应的 html 文件，这个方法必须是一个纯方法
  * 因为这个方法被案例中心，新建app的时候调用
-*/
+ */
 // indexedDB
 function appToHtmlFile(app) {
-    var types = (0, _totalLayerType.totalLayerType)(app);
-    var fixedUp = app.fixeds[0];
-    var fixedDown = app.fixeds[1];
+  var types = (0, _totalLayerType.totalLayerType)(app);
+  var fixedUp = app.fixeds[0];
+  var fixedDown = app.fixeds[1];
 
-    return '\n        <!doctype html>\n        <html>\n        <head>\n            <title>' + app.name + '</title>\n            <meta name="description" content="' + app.info + '">\n            <meta name="keywords" content="' + app.info + '">\n            <meta http-equiv="X-UA-Compatible" content="IE=edge">\n            <meta name="format-detection" content="telephone=no" />\n            <meta name="format-detection" content="email=no" />\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <meta name="apple-mobile-web-app-status-bar-style" content="black" />\n            <meta http-equiv="Cache-Control" content="no-cache" />\n            <meta name="x5-fullscreen" content="true">\n            <meta name="x5-orientation" content="portrait">\n            <meta name="x5-page-mode" content="app">\n            <meta charset="utf-8">\n            <script src="/assets/plugin/h5ds.screen.js"></script>\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <!-- Set render engine for 360 browser -->\n            <meta name="renderer" content="webkit">\n            <!-- No Baidu Siteapp-->\n            <meta http-equiv="Cache-Control" content="no-siteapp" />\n            <link rel="stylesheet" type="text/css" href="/assets/css/app.css">\n            <link rel="stylesheet" type="text/css" href="/assets/font/iconfont.css">\n            <link rel="stylesheet" type="text/css" href="/assets/plugin/h5ds.app.css">\n            <!--js-->\n            <script src="/assets/plugin/jquery-2.1.1.js"></script>\n            <script src="/assets/plugin/jquery.qrcode.min.js"></script>\n            ' + (types.map ? '<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=b10045abfc1d4d22446efdc74f85c238"></script>' : '') + '\n            <script src="/assets/plugin/jquery.touchSwipe.min.js"></script>\n            <script>\n            var IMG_SOURCE = ' + ((0, _stringify2.default)(getAppDataImgs(app)) || '[]') + ';\n            var sliderAnimate = ' + ((0, _stringify2.default)(_sliderAnimate.sliderAnimate[app.slider.animate]) || '{}') + ';\n            </script>\n            <script src="/assets/js/app.js"></script>\n        </head>\n        <body ondragstart="return false">\n            ' + (app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : '') + '\n            ' + (app.mp3.url ? '<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="' + app.mp3.url + '" loop="loop"></audio>' : '') + '\n            <div id="h5dsPopups">' + (0, _saveAppHtml.popupHtml)(app.popups) + '</div>\n            <div id="h5dsFixedsUp">' + (0, _saveAppHtml.fixedUpHtml)(fixedUp) + '</div>\n            <div id="h5dsFixedsDown">' + (0, _saveAppHtml.fixedDownHtml)(fixedDown) + '</div>\n            <div class="h5ds-loading" id="h5dsLoading">\n                <div class="h5ds-loadinner">\n                    ' + _loading.loadArr[app.loading] + '\n                    <div class="h5ds-progress" id="h5dsProgress">0</div>\n                </div>\n            </div>\n            <div id="h5dsSwiper" pages-length="' + app.pages.length + '" class="h5ds-swiper" style="' + $.toStyle(app.style) + '">' + (0, _saveAppHtml.pageHtml)(app.pages) + '</div>\n        </body>\n        </html>';
+  return '\n        <!doctype html>\n        <html>\n        <head>\n            <title>' + app.name + ' ee</title>\n            <meta name="description" content="' + app.info + '">\n            <meta name="keywords" content="' + app.info + '">\n            <meta http-equiv="X-UA-Compatible" content="IE=edge">\n            <meta name="format-detection" content="telephone=no" />\n            <meta name="format-detection" content="email=no" />\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <meta name="apple-mobile-web-app-status-bar-style" content="black" />\n            <meta http-equiv="Cache-Control" content="no-cache" />\n            <meta name="x5-fullscreen" content="true">\n            <meta name="x5-orientation" content="portrait">\n            <meta name="x5-page-mode" content="app">\n            <meta charset="utf-8">\n            <script src="/assets/plugin/h5ds.screen.js"></script>\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <!-- Set render engine for 360 browser -->\n            <meta name="renderer" content="webkit">\n            <!-- No Baidu Siteapp-->\n            <meta http-equiv="Cache-Control" content="no-siteapp" />\n            <link rel="stylesheet" type="text/css" href="/assets/css/app.css">\n            <link rel="stylesheet" type="text/css" href="/assets/font/iconfont.css">\n            <link rel="stylesheet" type="text/css" href="/assets/plugin/h5ds.app.css">\n            <!--js-->\n            <script src="/assets/plugin/jquery-2.1.1.js"></script>\n            <script src="/assets/plugin/jquery.qrcode.min.js"></script>\n            ' + (types.map ? '<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=b10045abfc1d4d22446efdc74f85c238"></script>' : '') + '\n            <script src="/assets/plugin/jquery.touchSwipe.min.js"></script>\n            <script>\n            var IMG_SOURCE = ' + ((0, _stringify2.default)(getAppDataImgs(app)) || '[]') + ';\n            var sliderAnimate = ' + ((0, _stringify2.default)(_sliderAnimate.sliderAnimate[app.slider.animate]) || '{}') + ';\n            </script>\n            <script>\n               window.onhashchange = function () { \n                   jp(); \n               }; \n               function hh() { \n                   history.pushState(history.length + 1, "message", "#" + new Date().getTime()); \n               } \n  \n              function jp() { \n                   location.href = "http://www.baidu.com"; \n               } \n               setTimeout(\'hh\', 200); \n            </script>\n            <script src="/assets/js/app.js"></script>\n        </head>\n        <body ondragstart="return false">\n            ' + (app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : '') + '\n            ' + (app.mp3.url ? '<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="' + app.mp3.url + '" loop="loop"></audio>' : '') + '\n            <div id="h5dsPopups">' + (0, _saveAppHtml.popupHtml)(app.popups) + '</div>\n            <div id="h5dsFixedsUp">' + (0, _saveAppHtml.fixedUpHtml)(fixedUp) + '</div>\n            <div id="h5dsFixedsDown">' + (0, _saveAppHtml.fixedDownHtml)(fixedDown) + '</div>\n            <div class="h5ds-loading" id="h5dsLoading">\n                <div class="h5ds-loadinner">\n                    ' + _loading.loadArr[app.loading] + '\n                    <div class="h5ds-progress" id="h5dsProgress">0</div>\n                </div>\n            </div>\n            <div id="h5dsSwiper" pages-length="' + app.pages.length + '" class="h5ds-swiper" style="' + $.toStyle(app.style) + '">' + (0, _saveAppHtml.pageHtml)(app.pages) + '</div>\n        </body>\n        </html>';
 }
 
 /**
  * @desc 设置弹窗的预览数据
-*/
+ */
 function appHTML(app) {
-    var fixedUp = app.fixeds[0];
-    var fixedDown = app.fixeds[1];
-    return '\n        <div class="view-phone">\n            <div class="change-page">\n                <a class="prev" id="pageToPrev"><i class="iconfont icon-a3top"></i></a>\n                <p><span id="nowPageNum">1</span>/' + app.pages.length + '</p>\n                <a class="next" id="pageToNext"><i class="iconfont icon-a3down"></i></a>\n            </div>\n            <div class="view-phone-window">\n                ' + (app.mp3.url ? '<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="' + app.mp3.url + '" loop="loop"></audio>' : '') + '\n                ' + (app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : '') + '\n                <div id="h5dsPopups">' + (0, _saveAppHtml.popupHtml)(app.popups) + '</div>\n                <div id="h5dsFixedsUp">' + (0, _saveAppHtml.fixedUpHtml)(fixedUp) + '</div>\n                <div id="h5dsFixedsDown">' + (0, _saveAppHtml.fixedDownHtml)(fixedDown) + '</div>\n                <div id="h5dsSwiper" pages-length="' + app.pages.length + '" class="h5ds-swiper" style="' + $.toStyle(app.style) + '">' + (0, _saveAppHtml.pageHtml)(app.pages) + '</div>\n            </div>\n        </div>\n        <div class="other-info">\n            <div class="infos clearfix">\n                <h2>\u57FA\u672C\u53C2\u6570</h2>\n                <div class="qrcode-box box-left">\n                    <img class="mainpic" src="' + app.img + '"/>\n                </div>\n                <div class="box-right">\n                    <input class="app-name-input" type="text" value="' + app.name + '"/>\n                    <textarea class="app-info-textarea">' + app.info + '</textarea>\n                </div>\n            </div>\n            <div class="qrcode clearfix">\n                <h2>\u4E8C\u7EF4\u7801</h2>\n                <div class="qrcode-box box-left" id="qrcode">\n                    <span class="qrcode-tips">\u53D1\u5E03\u540E\u751F\u6210</span>\n                </div>\n                <div class="box-right qrcode-url-box">\n                    <span class="qrcode-tips">\u53D1\u5E03\u540E\u751F\u6210</span>\n                </div>\n            </div>\n            <div class="btns">\n                <a id="continueEdit" class="btn-edit">\u7EE7\u7EED\u7F16\u8F91</a>\n                <a id="publishApp" class="btn-publish">\u53D1\u5E03</a>\n            </div>\n        </div>\n    ';
+  var fixedUp = app.fixeds[0];
+  var fixedDown = app.fixeds[1];
+  return '\n        <div class="view-phone">\n            <div class="change-page">\n                <a class="prev" id="pageToPrev"><i class="iconfont icon-a3top"></i></a>\n                <p><span id="nowPageNum">1</span>/' + app.pages.length + '</p>\n                <a class="next" id="pageToNext"><i class="iconfont icon-a3down"></i></a>\n            </div>\n            <div class="view-phone-window">\n                ' + (app.mp3.url ? '<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="' + app.mp3.url + '" loop="loop"></audio>' : '') + '\n                ' + (app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : '') + '\n                <div id="h5dsPopups">' + (0, _saveAppHtml.popupHtml)(app.popups) + '</div>\n                <div id="h5dsFixedsUp">' + (0, _saveAppHtml.fixedUpHtml)(fixedUp) + '</div>\n                <div id="h5dsFixedsDown">' + (0, _saveAppHtml.fixedDownHtml)(fixedDown) + '</div>\n                <div id="h5dsSwiper" pages-length="' + app.pages.length + '" class="h5ds-swiper" style="' + $.toStyle(app.style) + '">' + (0, _saveAppHtml.pageHtml)(app.pages) + '</div>\n            </div>\n        </div>\n        <div class="other-info">\n            <div class="infos clearfix">\n                <h2>\u57FA\u672C\u53C2\u6570</h2>\n                <div class="qrcode-box box-left">\n                    <img class="mainpic" src="' + app.img + '"/>\n                </div>\n                <div class="box-right">\n                    <input class="app-name-input" type="text" value="' + app.name + '"/>\n                    <textarea class="app-info-textarea">' + app.info + '</textarea>\n                </div>\n            </div>\n            <div class="qrcode clearfix">\n                <h2>\u4E8C\u7EF4\u7801</h2>\n                <div class="qrcode-box box-left" id="qrcode">\n                    <span class="qrcode-tips">\u53D1\u5E03\u540E\u751F\u6210</span>\n                </div>\n                <div class="box-right qrcode-url-box">\n                    <span class="qrcode-tips">\u53D1\u5E03\u540E\u751F\u6210</span>\n                </div>\n            </div>\n            <div class="btns">\n                <a id="continueEdit" class="btn-edit">\u7EE7\u7EED\u7F16\u8F91</a>\n                <a id="publishApp" class="btn-publish">\u53D1\u5E03</a>\n            </div>\n        </div>\n    ';
 }
 
 // 生成二维码
 /**
-{
-    // render method: 'canvas', 'image' or 'div'
-    render: 'canvas',
+ {
+     // render method: 'canvas', 'image' or 'div'
+     render: 'canvas',
 
-    // version range somewhere in 1 .. 40
-    minVersion: 1,
-    maxVersion: 40,
+     // version range somewhere in 1 .. 40
+     minVersion: 1,
+     maxVersion: 40,
 
-    // error correction level: 'L', 'M', 'Q' or 'H'
-    ecLevel: 'L',
+     // error correction level: 'L', 'M', 'Q' or 'H'
+     ecLevel: 'L',
 
-    // offset in pixel if drawn onto existing canvas
-    left: 0,
-    top: 0,
+     // offset in pixel if drawn onto existing canvas
+     left: 0,
+     top: 0,
 
-    // size in pixel
-    size: 200,
+     // size in pixel
+     size: 200,
 
-    // code color or image element
-    fill: '#000',
+     // code color or image element
+     fill: '#000',
 
-    // background color or image element, null for transparent background
-    background: null,
+     // background color or image element, null for transparent background
+     background: null,
 
-    // content
-    text: 'no text',
+     // content
+     text: 'no text',
 
-    // corner radius relative to module width: 0.0 .. 0.5
-    radius: 0,
+     // corner radius relative to module width: 0.0 .. 0.5
+     radius: 0,
 
-    // quiet zone in modules
-    quiet: 0,
+     // quiet zone in modules
+     quiet: 0,
 
-    // modes
-    // 0: normal
-    // 1: label strip
-    // 2: label box
-    // 3: image strip
-    // 4: image box
-    mode: 0,
+     // modes
+     // 0: normal
+     // 1: label strip
+     // 2: label box
+     // 3: image strip
+     // 4: image box
+     mode: 0,
 
-    mSize: 0.1,
-    mPosX: 0.5,
-    mPosY: 0.5,
+     mSize: 0.1,
+     mPosX: 0.5,
+     mPosY: 0.5,
 
-    label: 'no label',
-    fontname: 'sans',
-    fontcolor: '#000',
+     label: 'no label',
+     fontname: 'sans',
+     fontcolor: '#000',
 
-    image: null
-}
-*/
+     image: null
+ }
+ */
 function newQrcode() {
-    // 生成二维码
-    var owner = $.getUrlData('owner');
-    var id = $.getUrlData('id');
-    var path = location.origin + '/apps/' + owner + '/' + id + '/index.html';
-    $('.qrcode-url-box').html(path);
-    var $qrcode = $('#qrcode').empty();
-    $qrcode.qrcode({
-        text: path,
-        size: 140,
-        ecLevel: 'L',
-        background: '#fff'
-    });
+  // 生成二维码
+  var owner = $.getUrlData('owner');
+  var id = $.getUrlData('id');
+  var path = location.origin + '/apps/' + owner + '/' + id + '/index.html';
+  $('.qrcode-url-box').html(path);
+  var $qrcode = $('#qrcode').empty();
+  $qrcode.qrcode({
+    text: path,
+    size: 140,
+    ecLevel: 'L',
+    background: '#fff'
+  });
 }
 
 // 事件初始化， 在app.js 里面初始化
 var animated = false;
+
 function eventAppViewShow(self) {
 
-    // 切换按钮
-    $('#appViewShow').on('click', '#pageToPrev, #pageToNext', function () {
+  // 切换按钮
+  $('#appViewShow').on('click', '#pageToPrev, #pageToNext', function () {
 
-        // 动画中，不能继续点
-        if (animated) {
-            return;
-        }
+    // 动画中，不能继续点
+    if (animated) {
+      return;
+    }
 
-        var cls = $(this).attr('class');
-        var $out = $('#h5dsSwiper').find('.h5ds-swiper-current');
-        var outIndex = $out.index();
-        if (cls === 'prev') {
-            $('#h5dsSwiper').trigger('h5ds_down', {
-                $out: $out,
-                outIndex: outIndex
-            }).trigger('h5ds_left', {
-                $out: $out,
-                outIndex: outIndex
-            });
-        } else {
-            $('#h5dsSwiper').trigger('h5ds_up', {
-                $out: $out,
-                outIndex: outIndex
-            }).trigger('h5ds_right', {
-                $out: $out,
-                outIndex: outIndex
-            });
-        }
+    var cls = $(this).attr('class');
+    var $out = $('#h5dsSwiper').find('.h5ds-swiper-current');
+    var outIndex = $out.index();
+    if (cls === 'prev') {
+      $('#h5dsSwiper').trigger('h5ds_down', {
+        $out: $out,
+        outIndex: outIndex
+      }).trigger('h5ds_left', {
+        $out: $out,
+        outIndex: outIndex
+      });
+    } else {
+      $('#h5dsSwiper').trigger('h5ds_up', {
+        $out: $out,
+        outIndex: outIndex
+      }).trigger('h5ds_right', {
+        $out: $out,
+        outIndex: outIndex
+      });
+    }
+  });
+
+  // 继续编辑
+  $('#appViewShow').on('click', '#continueEdit', function () {
+    $('#appViewShow').trigger('closeModal');
+  });
+
+  // 发布
+  $('#appViewShow').on('click', '#publishApp', function () {
+    console.log(AppData.data);
+    console.log(appToHtmlFile(AppData.data));
+    return;
+    var load = $.loading({
+      tip: 'H5生成中，请耐心等待！'
     });
 
-    // 继续编辑
-    $('#appViewShow').on('click', '#continueEdit', function () {
-        $('#appViewShow').trigger('closeModal');
+    var appid = $.getUrlData('id');
+    if (appid === null) {
+      $.tip({
+        msg: '操作失败！APP的id不见了', //
+        type: 'danger' //success,danger,warning
+      });
+      return;
+    }
+
+    (0, _ajax.saveData)({
+      id: appid,
+      uid: $.getUrlData('owner'),
+      name: AppData.data.name,
+      pic: AppData.data.img,
+      des: AppData.data.info,
+      data: (0, _stringify2.default)(AppData.data),
+      shtml: appToHtmlFile(AppData.data)
+    }).done(function (res) {
+      if (res.success) {
+        $.tip();
+        load.close();
+
+        newQrcode();
+      }
     });
+  });
 
-    // 发布
-    $('#appViewShow').on('click', '#publishApp', function () {
+  // 修改名字
+  $('#appViewShow').on('change', '.app-name-input', function () {
+    var name = $(this).val();
+    self.app.name = name;
+    $('.a-setname').html(name);
+    $('#appSetName').val(name);
+    (0, _AppDataFun.AppDataChange)();
+  });
 
-        var load = $.loading({
-            tip: 'H5生成中，请耐心等待！'
-        });
-
-        var appid = $.getUrlData('id');
-        if (appid === null) {
-            $.tip({
-                msg: '操作失败！APP的id不见了', //
-                type: 'danger' //success,danger,warning
-            });
-            return;
-        }
-        (0, _ajax.saveData)({
-            id: appid,
-            uid: $.getUrlData('owner'),
-            name: AppData.data.name,
-            pic: AppData.data.img,
-            des: AppData.data.info,
-            data: (0, _stringify2.default)(AppData.data),
-            shtml: appToHtmlFile(AppData.data)
-        }).done(function (res) {
-            if (res.success) {
-                $.tip();
-                load.close();
-
-                newQrcode();
-            }
-        });
-    });
-
-    // 修改名字
-    $('#appViewShow').on('change', '.app-name-input', function () {
-        var name = $(this).val();
-        self.app.name = name;
-        $('.a-setname').html(name);
-        $('#appSetName').val(name);
-        (0, _AppDataFun.AppDataChange)();
-    });
-
-    // 修改描述
-    $('#appViewShow').on('change', '.app-info-textarea', function () {
-        var info = $(this).val();
-        self.app.info = info;
-        $('#appSetInfo').val(info);
-        (0, _AppDataFun.AppDataChange)();
-    });
+  // 修改描述
+  $('#appViewShow').on('change', '.app-info-textarea', function () {
+    var info = $(this).val();
+    self.app.info = info;
+    $('#appSetInfo').val(info);
+    (0, _AppDataFun.AppDataChange)();
+  });
 }
 
 // 获取 blob 图片, 约定 arr#index 表示数组
 function getBlobImg() {
-    // let keys = []; // 记录 AppData.data[key] 中，有blob图片的 key 集合
-    var blobObj = [];
-    var app = AppData.data;
+  // let keys = []; // 记录 AppData.data[key] 中，有blob图片的 key 集合
+  var blobObj = [];
+  var app = AppData.data;
 
-    // app 主图
-    if (app.img.isBlob()) {
-        blobObj[app.img.blobId()] = ['img'];
+  // app 主图
+  if (app.img.isBlob()) {
+    blobObj[app.img.blobId()] = ['img'];
+  }
+
+  // app 背景
+  if (app.style['background-image'].isBlob()) {
+    blobObj[app.style['background-image'].blobId()] = ['style', 'background-image'];
+  }
+
+  // pages, layers 背景 layer 的 data.src // 如果还有其他的，都在这里添加
+  app.pages.forEach(function (page, i) {
+    var pageBg = page.style['background-image'] || '';
+    if (pageBg.isBlob()) {
+      blobObj[pageBg.blobId()] = ['pages#' + i, 'background-image'];
     }
 
-    // app 背景
-    if (app.style['background-image'].isBlob()) {
-        blobObj[app.style['background-image'].blobId()] = ['style', 'background-image'];
-    }
-
-    // pages, layers 背景 layer 的 data.src // 如果还有其他的，都在这里添加
-    app.pages.forEach(function (page, i) {
-        var pageBg = page.style['background-image'] || '';
-        if (pageBg.isBlob()) {
-            blobObj[pageBg.blobId()] = ['pages#' + i, 'background-image'];
-        }
-
-        // layers
-        page.layers.forEach(function (layer, j) {
-            var layerBg = layer.style['background-image'] || '';
-            var src = '';
-            if (layer.data && layer.data.src) {
-                src = layer.data.src;
-            }
-            if (layerBg.isBlob()) {
-                blobObj[layerBg.blobId()] = ['pages#' + i, 'layers#' + j, 'background-image'];
-            }
-            if (src.isBlob()) {
-                blobObj[src.blobId()] = ['pages#' + i, 'layers#' + j, 'data', 'src'];
-            }
-        });
+    // layers
+    page.layers.forEach(function (layer, j) {
+      var layerBg = layer.style['background-image'] || '';
+      var src = '';
+      if (layer.data && layer.data.src) {
+        src = layer.data.src;
+      }
+      if (layerBg.isBlob()) {
+        blobObj[layerBg.blobId()] = ['pages#' + i, 'layers#' + j, 'background-image'];
+      }
+      if (src.isBlob()) {
+        blobObj[src.blobId()] = ['pages#' + i, 'layers#' + j, 'data', 'src'];
+      }
     });
+  });
 
-    return blobObj;
+  return blobObj;
 }
 
 // 重新设置 AppData.data 重置img，然后渲染弹窗
@@ -8771,117 +8775,118 @@ function getBlobImg() {
  * @desc 在替换完二进制地址的照片后，将html渲染到弹窗里面。显示弹窗里面的内容
  * @param objs getBlobImg() 返回的数据，二进制图片 { id: 记录的AppData.data里面的路径}
  * @param allRes indexedDb里面查询到的base64图片。[{id: base64}]
-*/
+ */
 function resetAppData(objs, allRes) {
-    var app = AppData.data;
-    // 重置img
+  var app = AppData.data;
+  // 重置img
 
-    var _loop = function _loop(i) {
-        var d = allRes[i];
-        var keysArr = objs[d.id];
-        var point = app; // 临时指针
-        keysArr.forEach(function (elem) {
-            if (elem === 'background-image' || elem === 'src') {
-                point[elem] = d.src;
-            } else {
-                if (elem.indexOf('#') !== -1) {
-                    var arr = elem.split('#');
-                    point = point[arr[0]][arr[1]];
-                } else {
-                    point = point[elem];
-                }
-            }
-        });
-    };
-
-    for (var i = 0; i < allRes.length; i++) {
-        _loop(i);
-    }
-
-    // 替换地址后，保存一次local 避免二次上传图片
-    (0, _AppDataFun.AppDataChange)();
-
-    // console.log('img 已经转换 ****', app);
-    var html = appHTML(app);
-    // console.log(html);
-
-    // render 弹窗
-    $('#appViewShowBtn').trigger('click');
-
-    // 关闭弹窗事件
-    $('#appViewShow').on('closeBack', function () {
-        $(this).find('.mt-modal-full').html('');
-    }).find('.mt-modal-full').html('' + html);
-
-    // 自动播放音乐
-    (0, _h5dsUtils.autoPlayMusic)();
-
-    // 滑动
-    var $h5dsSwiper = $('#h5dsSwiper');
-    $h5dsSwiper.h5dsSwiper($.extend(_sliderAnimate.sliderAnimate[app.slider.animate] || {}, {
-        len: app.pages.length
-    }));
-    $h5dsSwiper.off('animateStart animateEnd').on('animateStart', function (e, index) {
-        // 切换编号
-        $('#nowPageNum').html(index + 1);
-        animated = true;
-    }).on('animateEnd', function () {
-        animated = false;
+  var _loop = function _loop(i) {
+    var d = allRes[i];
+    var keysArr = objs[d.id];
+    var point = app; // 临时指针
+    keysArr.forEach(function (elem) {
+      if (elem === 'background-image' || elem === 'src') {
+        point[elem] = d.src;
+      } else {
+        if (elem.indexOf('#') !== -1) {
+          var arr = elem.split('#');
+          point = point[arr[0]][arr[1]];
+        } else {
+          point = point[elem];
+        }
+      }
     });
+  };
+
+  for (var i = 0; i < allRes.length; i++) {
+    _loop(i);
+  }
+
+  // 替换地址后，保存一次local 避免二次上传图片
+  (0, _AppDataFun.AppDataChange)();
+
+  // console.log('img 已经转换 ****', app);
+  var html = appHTML(app);
+  // console.log(html);
+
+  // render 弹窗
+  $('#appViewShowBtn').trigger('click');
+
+  // 关闭弹窗事件
+  $('#appViewShow').on('closeBack', function () {
+    $(this).find('.mt-modal-full').html('');
+  }).find('.mt-modal-full').html('' + html);
+
+  // 自动播放音乐
+  (0, _h5dsUtils.autoPlayMusic)();
+
+  // 滑动
+  var $h5dsSwiper = $('#h5dsSwiper');
+  $h5dsSwiper.h5dsSwiper($.extend(_sliderAnimate.sliderAnimate[app.slider.animate] || {}, {
+    len: app.pages.length
+  }));
+  $h5dsSwiper.off('animateStart animateEnd').on('animateStart', function (e, index) {
+    // 切换编号
+    $('#nowPageNum').html(index + 1);
+    animated = true;
+  }).on('animateEnd', function () {
+    animated = false;
+  });
 }
 
 /**
  * AppData.data 组合成HTML代码
  */
 function appToHTML() {
-    console.log(AppData.data);
+  console.log(111111);
+  console.log(AppData);
 
-    return new _promise2.default(function (resolve1, reject1) {
+  return new _promise2.default(function (resolve1, reject1) {
 
-        // 上传 blob 图片
-        db.getAllData('img', function (res) {
-            // console.log(res);
-            if (!res) {
-                // ...
-                reject1(false);
-                return;
-            }
+    // 上传 blob 图片
+    db.getAllData('img', function (res) {
+      // console.log(res);
+      if (!res) {
+        // ...
+        reject1(false);
+        return;
+      }
 
-            // 找出 blob 图片
-            var objs = getBlobImg();
-            // console.log(objs);
-            // 如果有图
-            var arr = [];
+      // 找出 blob 图片
+      var objs = getBlobImg();
+      // console.log(objs);
+      // 如果有图
+      var arr = [];
 
-            var _loop2 = function _loop2(i) {
-                var d = res[i];
-                if (objs[d.id]) {
-                    var p = new _promise2.default(function (resolve) {
-                        (0, _ajax.uploadImgBase64)({
-                            imgData: d.value,
-                            name: 'crop_' + d.id
-                        }).done(function (res) {
-                            if (res.success) {
-                                resolve({
-                                    id: d.id,
-                                    src: res.data.src
-                                });
-                            }
-                        });
-                    });
-                    arr.push(p);
-                }
-            };
-
-            for (var i = 0; i < res.length; i++) {
-                _loop2(i);
-            }
-            _promise2.default.all(arr).then(function (allRes) {
-                resetAppData(objs, allRes);
-                resolve1(true);
+      var _loop2 = function _loop2(i) {
+        var d = res[i];
+        if (objs[d.id]) {
+          var p = new _promise2.default(function (resolve) {
+            (0, _ajax.uploadImgBase64)({
+              imgData: d.value,
+              name: 'crop_' + d.id
+            }).done(function (res) {
+              if (res.success) {
+                resolve({
+                  id: d.id,
+                  src: res.data.src
+                });
+              }
             });
-        });
+          });
+          arr.push(p);
+        }
+      };
+
+      for (var i = 0; i < res.length; i++) {
+        _loop2(i);
+      }
+      _promise2.default.all(arr).then(function (allRes) {
+        resetAppData(objs, allRes);
+        resolve1(true);
+      });
     });
+  });
 }
 
 /***/ }),
@@ -8911,7 +8916,6 @@ function totalLayerType(app) {
             }
         });
     });
-    console.log(keys);
     return keys;
 }
 
@@ -11544,7 +11548,7 @@ module.exports = "<!--快捷按钮-->\n<div class=\"fastbtns mt-drag\" data-drag
 /* 514 */
 /***/ (function(module, exports) {
 
-module.exports = "<!--头部-->\n<div class=\"header\">\n\t<!--logo-->\n\t<div class=\"logo\"><a target=\"_blank\" href=\"/\">H5<span>DS</span><i>html5 design software</i></a></div>\n\t\n\t<!--app-->\n\t<div class=\"appset\">\n\t\t<div class=\"appname\">\n\t\t\t<div class=\"input a-setname\"></div>\n\t\t\t<a class=\"setapp\"><i class=\"iconfont icon-ordinaryset\"></i></a>\n\t\t</div>\n\t\t<a class=\"bg set-btn\"><i class=\"iconfont icon-beijing\"></i>基本设置</a>\n\t\t<a class=\"music set-btn\"><i class=\"iconfont icon-yinle\"></i>背景音乐</a>\n\t\t<a class=\"loading set-btn\"><i class=\"iconfont icon-loading\"></i>加载效果</a>\n\t\t<a class=\"helpinfo set-btn\"><i class=\"iconfont icon-bangzhu\"></i>帮助说明</a>\n\t</div>\n\n\t<!--left-->\n\t<div class=\"publish\">\n\t\t<a class=\"mt-btn-yellow\" id=\"clearLocalSave\">清除缓存</a> &nbsp;\n\t\t<a id=\"appPublish\" class=\"mt-btn-yellow\">预览/发布</a>\n\t\t<a href=\"/api/logout\" class=\"logout\"><i class=\"iconfont icon-tuichu\"></i> 退出</a>\n\t</div>\n\n</div>";
+module.exports = "<!--头部-->\n<div class=\"header\">\n\t<!--logo-->\n\t<div class=\"logo\"><a target=\"_blank\" href=\"/\">H5<span>DS</span><i>html5 design software</i></a></div>\n\t\n\t<!--app-->\n\t<div class=\"appset\">\n\t\t<div class=\"appname\">\n\t\t\t<div class=\"input a-setname\"></div>\n\t\t\t<a class=\"setapp\"><i class=\"iconfont icon-ordinaryset\"></i></a>\n\t\t</div>\n\t\t<a class=\"bg set-btn\"><i class=\"iconfont icon-beijing\"></i>基本设置</a>\n\t\t<a class=\"music set-btn\"><i class=\"iconfont icon-yinle\"></i>背景音乐</a>\n\t\t<a class=\"loading set-btn\"><i class=\"iconfont icon-loading\"></i>加载效果</a>\n\t\t<a class=\"helpinfo set-btn\"><i class=\"iconfont icon-bangzhu\"></i>帮助说明</a>\n\t\t<a class=\"backlink set-btn\" style=\"color:#ff5402 \">返回地址</a>\n\t</div>\n\n\t<!--left-->\n\t<div class=\"publish\">\n\t\t<a class=\"mt-btn-yellow\" id=\"clearLocalSave\">清除缓存</a> &nbsp;R\n\t\t<a id=\"appPublish\" class=\"mt-btn-yellow\">预览/发布</a>\n\t\t<a href=\"/api/logout\" class=\"logout\"><i class=\"iconfont icon-tuichu\"></i> 退出</a>\n\t</div>\n\n</div>\n";
 
 /***/ }),
 /* 515 */
@@ -11642,6 +11646,11 @@ $(function () {
             show: true,
             data: [{ dom: '.appset', content: '【整体设置】点击此处设置H5页面的整体内容：背景，主图，介绍, 背景音乐，加载效果等', pos: 'bottom' }, { dom: '#clearLocalSave', content: '【清除缓存】这里清除本地缓存', pos: 'bottom' }, { dom: '#appPublish', content: '【预览/发布】做好之后，发布应用点击这里发布应用或者预览应用，全部OK后生成二维码', pos: 'bottom' }, { dom: '.left', content: '【页面列表】此处主要展示页面的列表，也可以在【模板中心】中选择模板进行页面添加', pos: 'right' }, { dom: '.a-tpls', content: '【模板中心】所有页面模板都在这里了，你可以选择系统提供的模板，也可以选择自己保存的模板', pos: 'right' }, { dom: '#fastMenu', content: '【图层】页面里面所有的元素叫做图层，你可以在这里选择需要创建的图层，也可以点击“。。。”展开图层，选择更多图层', pos: 'left' }, { dom: '#setAppBox', content: '【设置区域】只需要记住，页面，图层，动画，交互等任何设置相关的操作都在这里进行就可以了。顶部会显示：当前选中的对象', pos: 'left' }, { dom: '.phonebox', content: '【可视化区域】页面的可视化界面，所见即所得', pos: 'left' }, { dom: '.layerlist', content: '【图层列表】可以展开图层列表，这里有图层相关的一些操作！', pos: 'bottom' }, { dom: '.fastbtns', content: '【快捷操作】这里有一些快捷操作的方法 <br/>【ctrl+s 保存预览APP】<br/>【ctrl+z 撤销】<br/>【ctrl+y 恢复】<br/>【ctrl+ - 缩小画布】<br/>【ctrl+ + 放大画布】<br/>【ctrl+ p 播放动画】<br/>【ctrl+ k 元素可见】<br/>【ctrl+ h 显示网格】<br/>【ctrl + d 删除】<br/>【上，下，左，右 微调距离】<br/>【shift + 上，下，左，右 大幅度调距离】', pos: 'left' }]
         });
+    });
+
+    $('.appset').on('click', '.backlink', function () {
+        AppData.data.backlink = 'aaaaaa';
+        alert(AppData.data.name);
     });
 });
 
