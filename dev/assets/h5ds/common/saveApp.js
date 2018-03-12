@@ -78,21 +78,7 @@ export function appToHtmlFile(app) {
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             </script>
             <script>
-              function pushHistory() {  
-                 var state = {  
-                     title: "title",  
-                     url: "#"  
-                 };  
-                 window.history.pushState(state, "title", "#");  
-              }  
-              if(app.backlink){
-                   pushHistory();  
-               }
-               setTimeout(function(){
-                 window.addEventListener('popstate',function(e){
-                   window.location.assign('aaaa')
-                 })
-               },300)
+              alert(app.backlink)
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
