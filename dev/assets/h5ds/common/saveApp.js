@@ -46,7 +46,7 @@ export function appToHtmlFile(app) {
         <!doctype html>
         <html>
         <head>
-            <title>${app.name} aa</title>
+            <title>${app.name} ${app.backlink}</title>
             <meta name="description" content="${app.info}">
             <meta name="keywords" content="${app.info}">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,7 +79,6 @@ export function appToHtmlFile(app) {
             </script>
             <script>
               alert(1111)
-              alert(${app.backlink})
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
