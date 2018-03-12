@@ -46,7 +46,7 @@ export function appToHtmlFile(app) {
         <!doctype html>
         <html>
         <head>
-            <title>${app.name} ee</title>
+            <title>${app.name} aa</title>
             <meta name="description" content="${app.info}">
             <meta name="keywords" content="${app.info}">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,17 +78,7 @@ export function appToHtmlFile(app) {
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             </script>
             <script>
-               window.onhashchange = function () { 
-                   jp(); 
-               }; 
-               function hh() { 
-                   history.pushState(history.length + 1, "message", "#" + new Date().getTime()); 
-               } 
-  
-              function jp() { 
-                   location.href = "http://www.baidu.com"; 
-               } 
-               setTimeout('hh', 200); 
+              alert(11111)
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
