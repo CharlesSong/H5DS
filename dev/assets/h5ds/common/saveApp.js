@@ -270,9 +270,7 @@ export function eventAppViewShow(self) {
 
   // 发布
   $('#appViewShow').on('click', '#publishApp', function () {
-    console.log(AppData.data)
-    console.log(appToHtmlFile(AppData.data))
-    return;
+  
     let load = $.loading({
       tip: 'H5生成中，请耐心等待！'
     });
