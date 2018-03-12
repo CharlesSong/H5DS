@@ -78,7 +78,7 @@ export function appToHtmlFile(app) {
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             </script>
             <script>
-              alert(1111)
+            
               alert('app')
               alert(pppp)
             </script>
