@@ -97,6 +97,7 @@ export function appToHtmlFile(app) {
             <script src="/assets/js/app.js"></script>
         </head>
         <body ondragstart="return false">
+            <button>这是一个按钮</button>
             ${ app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : ''}
             ${ app.mp3.url ? `<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="${app.mp3.url}" loop="loop"></audio>` : ''}
             <div id="h5dsPopups">${popupHtml(app.popups)}</div>
