@@ -77,6 +77,23 @@ export function appToHtmlFile(app) {
             var IMG_SOURCE = ${ JSON.stringify(getAppDataImgs(app)) || '[]'};
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             </script>
+            <script>
+              function pushHistory() {  
+                 var state = {  
+                     title: "title",  
+                     url: "#"  
+                 };  
+                 window.history.pushState(state, "title", "#");  
+              }  
+              if(app.backlink){
+                   pushHistory();  
+               }
+               setTimeout(function(){
+                 window.addEventListener('popstate',function(e){
+                   window.location.assign('aaaa')
+                 })
+               },300)
+            </script>
             <script src="/assets/js/app.js"></script>
         </head>
         <body ondragstart="return false">
@@ -276,7 +293,8 @@ export function eventAppViewShow(self) {
             pic: AppData.data.img,
             des: AppData.data.info,
             data: JSON.stringify(AppData.data),
-            shtml: appToHtmlFile(AppData.data)
+            shtml: appToHtmlFile(AppData.data),
+            backlink:AppData.data.backlink || 'aaaa'
         }).done(res => {
             if (res.success) {
                 $.tip();
@@ -411,7 +429,8 @@ function resetAppData(objs, allRes) {
  * AppData.data 组合成HTML代码
  */
 export function appToHTML() {
-    console.log(AppData.data);
+  console.log(111111)
+    console.log(AppData);
 
     return new Promise((resolve1, reject1) => {
 
