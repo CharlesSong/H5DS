@@ -79,7 +79,7 @@ export function appToHtmlFile(app) {
             </script>
             <script>
             	const backlink = ${app.backlink || 'asdasd'}
-            alert(backlink)
+            alert(111)
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
