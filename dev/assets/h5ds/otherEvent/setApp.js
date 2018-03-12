@@ -57,7 +57,7 @@ $(function () {
     })
 
     $('.appset').on('click', '.backlink', function () {
-      AppData.data.backlink = 'aaaaaa'
+      AppData.data.backlink = 'mm'
       alert(AppData.data.name)
   })
 })
