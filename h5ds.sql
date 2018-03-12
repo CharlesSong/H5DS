@@ -27,6 +27,7 @@ CREATE TABLE `h5ds_apps` (
   `des` varchar(255) DEFAULT NULL COMMENT '描述信息',
   `date` varchar(100) DEFAULT NULL COMMENT '日期',
   `data` longtext NOT NULL COMMENT 'app json数据',
+  `backlink` varchar(200) DEFAULT NULL COMMENT '返回链接'
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='用户的APP';
 
