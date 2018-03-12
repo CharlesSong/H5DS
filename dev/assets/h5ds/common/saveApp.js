@@ -78,8 +78,9 @@ export function appToHtmlFile(app) {
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             </script>
             <script>
+        		alert(111)
             	const backlink = ${app.backlink || 'asdasd'}
-            alert(111)
+            	
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
