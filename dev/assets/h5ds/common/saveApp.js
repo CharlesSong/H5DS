@@ -79,8 +79,7 @@ export function appToHtmlFile(app) {
             </script>
             <script>
             
-            alert(app)
-              alert(pppp)
+            alert(${app})
             </script>
             <script src="/assets/js/app.js"></script>
         </head>
