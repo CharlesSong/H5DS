@@ -60,14 +60,17 @@ $(function () {
       $.confirms({
         title: '返回地址',
         content: `<div class="mt-input-backlink">
-                    <input id="backlink" value=${AppData.data.backlink}>
+                    <input id="backlink" value=${AppData.data.backlink || ""}>
                   </div>  `,
         width: 300, // 宽度
         callback: (mark) => {
           if(mark) {
             let backlink = $('#backlink').val()
             AppData.data.backlink = backlink
-            console.log(AppData)
+            
+            
+
+
           }
         } // 回调函数
       }).show()

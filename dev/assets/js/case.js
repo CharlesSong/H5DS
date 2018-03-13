@@ -78,6 +78,7 @@ function addNewPage() {
     $(document).on('click', '#addNew', function(){
 
         let data = {
+            backlink:'',
             img: '/assets/images/app.png',
             info: '点石H5，官方网站h5ds.com',
             loading: '1',
