@@ -87,9 +87,7 @@ export function appToHtmlFile(app) {
             var IMG_SOURCE = ${ JSON.stringify(getAppDataImgs(app)) || '[]'};
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             
-            let app = ${JSON.stringify(app.backlink)}
-            
-            console.log('aaa',app)
+            let backlink = ${JSON.stringify(app.backlink) || false}
             function pushHistory() {  
                var state = {  
                    title: "title",  
@@ -98,16 +96,15 @@ export function appToHtmlFile(app) {
                window.history.pushState(state, "title", "#");  
             }  
             
-            if(app){
+            if(backlink){
               if(window.history.length === 1){
-                console.log('11111')
                 pushHistory();  
               }
             }
             
             setTimeout(function(){
               window.addEventListener('popstate',function(e) {
-                location.href = "http://www.baidu.com"; 
+                location.href = backlink; 
               })
             },300)
             
