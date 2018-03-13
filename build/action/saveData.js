@@ -60,14 +60,16 @@ exports.saveData = function(req, res) {
             pic: { type: Sequelize.CHAR },
             des: { type: Sequelize.CHAR },
             date: { type: Sequelize.CHAR },
-            data: { type: Sequelize.TEXT('long') }
+            data: { type: Sequelize.TEXT('long') },
+            backlink: { type: Sequelize.CHAR },
         }, {
             name: req.body.name,
             url: ph + '/index.html',
             pic: req.body.pic,
             des: req.body.des,
             date: sd.format(new Date(), 'YYYY/MM/DD HH:mm:ss'),
-            data: req.body.data
+            data: req.body.data,
+            backlink:JSON.parse(req.body.data).backlink
         }, {owner: uid, id: appid}, (ret) => {
             if (ret) {
                 result(req, res, {
