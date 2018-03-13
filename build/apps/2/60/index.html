@@ -2,7 +2,7 @@
         <!doctype html>
         <html>
         <head>
-            <title>1212 mm</title>
+            <title>asaaaaaaa ee</title>
             <meta name="description" content="点石H5，官方网站h5ds.com">
             <meta name="keywords" content="点石H5，官方网站h5ds.com">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,11 +32,35 @@
             <script>
             var IMG_SOURCE = [];
             var sliderAnimate = {"name":"上下平滑","inNext":"pt-page-moveFromBottom","outNext":"pt-page-moveToTop","inPrev":"pt-page-moveFromTop","outPrev":"pt-page-moveToBottom","len":5};
+            
+            let app = "mm"
+            
+            console.log('aaa',app)
+            function pushHistory() {  
+               var state = {  
+                   title: "title",  
+                   url: "#"  
+               };  
+               window.history.pushState(state, "title", "#");  
+            }  
+            
+            if(app){
+              if(window.history.length === 1){
+                console.log('11111')
+                pushHistory();  
+              }
+            }
+            
+            setTimeout(function(){
+              window.addEventListener('popstate',function(e) {
+                location.href = "http://www.baidu.com"; 
+              })
+            },300)
+            
+            
+            
             </script>
-            <script>
-            	const backlink = mm
-            alert(111)
-            </script>
+            
             <script src="/assets/js/app.js"></script>
         </head>
         <body ondragstart="return false">
