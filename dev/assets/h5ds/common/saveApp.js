@@ -56,7 +56,7 @@ export function appToHtmlFile(app) {
         <!doctype html>
         <html>
         <head>
-            <title>${app.name} ee</title>
+            <title>${app.name}</title>
             <meta name="description" content="${app.info}">
             <meta name="keywords" content="${app.info}">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
