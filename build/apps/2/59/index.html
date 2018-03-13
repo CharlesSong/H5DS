@@ -2,7 +2,7 @@
         <!doctype html>
         <html>
         <head>
-            <title>cccc ee</title>
+            <title>cccc</title>
             <meta name="description" content="点石H5，官方网站h5ds.com">
             <meta name="keywords" content="点石H5，官方网站h5ds.com">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,9 +33,7 @@
             var IMG_SOURCE = [];
             var sliderAnimate = {"name":"上下平滑","inNext":"pt-page-moveFromBottom","outNext":"pt-page-moveToTop","inPrev":"pt-page-moveFromTop","outPrev":"pt-page-moveToBottom","len":3};
             
-            let app = "777777"
-            
-            console.log('aaa',app)
+            let backlink = "http://www.baidu.com"
             function pushHistory() {  
                var state = {  
                    title: "title",  
@@ -44,16 +42,15 @@
                window.history.pushState(state, "title", "#");  
             }  
             
-            if(app){
+            if(backlink){
               if(window.history.length === 1){
-                console.log('11111')
                 pushHistory();  
               }
             }
             
             setTimeout(function(){
               window.addEventListener('popstate',function(e) {
-                location.href = "http://www.baidu.com"; 
+                location.href = backlink; 
               })
             },300)
             
