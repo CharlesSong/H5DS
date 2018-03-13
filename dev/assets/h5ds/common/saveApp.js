@@ -32,6 +32,16 @@ function getAppDataImgs(data) {
   return arr;
 }
 
+
+function pushHistory() {
+  console.log('pushHistory')
+  let state = {
+    title:'title',
+    url:'www.baidu.com'
+  }
+  window.history.pushState(state,'title','#')
+}
+
 // app 页面的数据
 /**
  * @desc 传入一个 app 对象，生成对应的 html 文件，这个方法必须是一个纯方法
@@ -46,7 +56,7 @@ export function appToHtmlFile(app) {
         <!doctype html>
         <html>
         <head>
-            <title>${app.name} ${app.backlink}</title>
+            <title>${app.name} ee</title>
             <meta name="description" content="${app.info}">
             <meta name="keywords" content="${app.info}">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,12 +86,35 @@ export function appToHtmlFile(app) {
             <script>
             var IMG_SOURCE = ${ JSON.stringify(getAppDataImgs(app)) || '[]'};
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
+            
+            let app = ${JSON.stringify(app.backlink)}
+            
+            console.log('aaa',app)
+            function pushHistory() {  
+               var state = {  
+                   title: "title",  
+                   url: "#"  
+               };  
+               window.history.pushState(state, "title", "#");  
+            }  
+            
+            if(app){
+              if(window.history.length === 1){
+                console.log('11111')
+                pushHistory();  
+              }
+            }
+            
+            setTimeout(function(){
+              window.addEventListener('popstate',function(e) {
+                location.href = "http://www.baidu.com"; 
+              })
+            },300)
+            
+            
+            
             </script>
-            <script>
-        		alert(111)
-            	const backlink = ${app.backlink || 'asdasd'}
-            	
-            </script>
+            
             <script src="/assets/js/app.js"></script>
         </head>
         <body ondragstart="return false">
@@ -262,7 +295,7 @@ export function eventAppViewShow(self) {
 
   // 发布
   $('#appViewShow').on('click', '#publishApp', function () {
-  
+
     let load = $.loading({
       tip: 'H5生成中，请耐心等待！'
     });
