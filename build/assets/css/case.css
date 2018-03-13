@@ -251,6 +251,19 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   height: 100%;
   width: 100%;
   cursor: pointer; }
+/* 返回链接 */
+.mt-input-backlink {
+  width: 260px;
+  height: 35px;
+  background: #fff;
+  border-radius: 2px; }
+.mt-input-backlink input {
+    width: 265px;
+    border: none;
+    height: 100%;
+    color: #535f6b;
+    text-indent: 10px;
+    float: left; }
 /* 搜索 */
 .mt-input-search {
   width: 305px;
