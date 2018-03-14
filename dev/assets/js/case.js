@@ -1,9 +1,5 @@
-/*
-* @Author: summerstarlee
-* @Date:   2018-03-14 10:18:05
-* @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 10:22:10
-* 案例
+/**
+ * 案例
 */
 import '../sass/ui/ui.scss';
 import '../sass/pages/pages.scss';
