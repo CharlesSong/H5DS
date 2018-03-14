@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 11:09:47
+* @Last Modified time: 2018-03-14 11:14:17
 */
 
 // 获取图片素材分类
@@ -20,7 +20,7 @@ export function saveData(obj) {
   console.log('saveData',obj)
     return $.ajax({
         type: 'post',
-        url: '/api/saveDataaaaa',
+        url: '/api/saveData',
         data: obj,
         dataType: 'json'
     });
