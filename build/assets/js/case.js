@@ -7462,7 +7462,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 12:04:45
+* @Last Modified time: 2018-03-14 12:10:21
 */
 
 /**
@@ -7478,7 +7478,7 @@ function initPage(num) {
     if (res.success) {
       for (var i = 0; i < res.data.length; i++) {
         var d = res.data[i];
-        str += '<li class="item' + (num === 1 && i === 0 ? ' active' : '') + '">\n                    <a href="' + (d.url ? d.url : 'javascript:;') + '" target="_blank"><img src="' + d.pic + '"/></a>\n                    <div class="date">' + d.date + '</div>\n                    <div class="info">\n                        <div class="name">' + d.name + '</div>\n                        <div class="desc">' + d.des + '</div>\n                        <a href="/edit?id=' + d.id + '&owner=' + d.owner + '">\u7F16\u8F91</a>\n                        <a class="to-del" data-name="' + d.name + '" data-id="' + d.id + '">\u5220\u9664</a>\n                        <i class="browsenum"  data-id="' + d.id + '">\u6D4F\u89C8\u91CF</i>\n                    </div>\n                </li>';
+        str += '<li class="item' + (num === 1 && i === 0 ? ' active' : '') + '">\n                    <a href="' + (d.url ? d.url : 'javascript:;') + '" target="_blank"><img src="' + d.pic + '"/></a>\n                    <div class="date">' + d.date + '</div>\n                    <div class="info">\n                        <div class="name">' + d.name + '</div>\n                        <div class="desc">' + d.des + '</div>\n                        <a href="/edit?id=' + d.id + '&owner=' + d.owner + '">\u7F16\u8F91</a>\n                        <a class="to-del" data-name="' + d.name + '" data-id="' + d.id + '">\u5220\u9664</a>\n                        <i class="browsenum"  data-id="' + d.id + '">\u8BBF\u95EE\u91CF:0</i>\n                    </div>\n                </li>';
       }
       $('#applist').html(str);
       // 设置分页
@@ -7496,7 +7496,6 @@ function initPage(num) {
 
 function browsenum() {
   window.onload = function () {
-
     setTimeout(function () {
       var browsenumLen = $('.browsenum').length;
       console.log(browsenumLen);
@@ -7510,7 +7509,7 @@ function browsenum() {
           }
         });
       });
-    }, 0);
+    }, 300);
   };
 }
 
@@ -7522,7 +7521,7 @@ function checkBNum() {
     (0, _ajax.checkBrowsenum)({ app_id: id }).done(function (res) {
       if (res.success) {
         var num = res.data.length;
-        $(_this).context.innerHTML = num;
+        $(_this).context.innerHTML = '访问量：' + num;
       }
     });
   });
