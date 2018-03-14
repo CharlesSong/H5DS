@@ -1348,6 +1348,10 @@ body {
       color: #fff; }
 .user-apps .info .to-del {
       background: #ccc; }
+.user-apps .info i {
+      font-size: 12px;
+      text-decoration: underline;
+      color: #1c84c6; }
 /*  帮助 */
 /*  帮助信息 */
 .helps {

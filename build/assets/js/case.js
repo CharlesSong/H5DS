@@ -7458,12 +7458,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //
 // object 变成 style top:10px; left: 20px; // ... 
-/*
-* @Author: summerstarlee
-* @Date:   2018-03-14 10:18:05
-* @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 10:22:10
-* 案例
+/**
+ * 案例
 */
 function initPage(num) {
     $.ajax({
