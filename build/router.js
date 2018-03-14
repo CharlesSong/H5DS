@@ -1,4 +1,11 @@
-﻿var { upload, uploadBase64 } = require('./action/upload.js');
+﻿/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:19:36
+*/
+
+var { upload, uploadBase64 } = require('./action/upload.js');
 var { login, getUser, logout } = require('./action/login.js');
 var { register } = require('./action/register.js');
 var { authorize } = require('./lib/filter');
@@ -12,6 +19,9 @@ var { getUserTpls, delUserTpls, addUserTpls } = require('./action/userTpls.js');
 var { saveData } = require('./action/saveData.js'); // 保存app 
 var { getUserApps, getUserApp, delApp, addData } = require('./action/userApp.js'); // 
 var { imgCode } = require('./action/imgCode.js'); // 验证码
+var {setBackLink} = require('./action/setBacLink.js') // 设置返回链接
+var {addBrowseNum} = require('./action/addBrowseNum.js') // 新增浏览量
+var {checkBrowsenum} = require('./action/checkBrowsenum.js') // 新增浏览量
 
 var { getH5 } = require('./action/getH5'); // SEO专用
 
@@ -61,8 +71,10 @@ function router(app, express) {
     app.post('/api/saveData', authorize, saveData); // 保存APP @param: data
     app.post('/api/addData', authorize, limitReq, addData); // 添加APP @param: data
     app.post('/api/delApp', authorize, delApp); // 删除APP @param: data
-
-    // url路由
+    app.post('/api/setBackLink', authorize, setBackLink); // 删除APP @param: data
+    app.post('/api/addBrowseNum', authorize, addBrowseNum); // 删除APP @param: data
+    app.post('/api/checkBrowsenum', authorize, checkBrowsenum); // 删除APP @param: data
+  // url路由
     app.get('/', function (req, res) { res.sendfile('./tpl/index.html'); }); // 主页
     app.get('/h5', function (req, res) {
         getH5(req, res, function(data) {

@@ -1,3 +1,10 @@
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:22:54
+*/
+
 // 获取图片素材分类
 export function getSysImgTypes() {
     return $.ajax({
@@ -10,6 +17,7 @@ export function getSysImgTypes() {
 // 保存APP
 // obj : { name: '', pageSize: 20, pageNum: 1 }
 export function saveData(obj) {
+  console.log('saveData',obj)
     return $.ajax({
         type: 'post',
         url: '/api/saveData',
@@ -17,6 +25,40 @@ export function saveData(obj) {
         dataType: 'json'
     });
 }
+
+//设置backlink的值
+// obj:{id:'',uid:'',backlink:''}
+export function setBackLink(obj){
+  console.log('setBackLink',obj)
+  return $.ajax({
+    type:'post',
+    url:'api/setBackLink',
+    data:obj,
+    dataType:'json'
+  })
+}
+
+
+export function addBrowseNum(obj){
+  console.log('addBrowseNum',obj)
+  return $.ajax({
+    type:'post',
+    url:'api/addBrowseNum',
+    data:obj,
+    dataType:'json'
+  })
+}
+
+export function checkBrowsenum(obj){
+  console.log('browsenum',obj)
+  return $.ajax({
+    type:'post',
+    url:'api/checkBrowsenum',
+    data:obj,
+    dataType:'json'
+  })
+}
+
 
 // 获取模板素材
 // obj : { name: '', pageSize: 20, pageNum: 1 }

@@ -1,5 +1,9 @@
-/**
- * 案例
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:22:10
+* 案例
 */
 import '../sass/ui/ui.scss';
 import '../sass/pages/pages.scss';
@@ -8,6 +12,8 @@ import '../h5ds/unit/toStyle.js'; // object 变成 style top:10px; left: 20px; /
 import '../h5ds/unit/confirm.js'; // object 变成 style top:10px; left: 20px; // ... 
 import '../h5ds/unit/pagelist.js'; //分页
 import '../h5ds/unit/tip.js'; //
+import { checkBrowsenum } from '../h5ds/server/ajax';
+
 
 import { appToHtmlFile } from '../h5ds/common/saveApp';
 
@@ -29,6 +35,7 @@ function initPage(num) {
                         <div class="desc">${d.des}</div>
                         <a href="/edit?id=${d.id}&owner=${d.owner}">编辑</a>
                         <a class="to-del" data-name="${d.name}" data-id="${d.id}">删除</a>
+                        <i class="browsenum"  data-id="${d.id}">浏览量</i>
                     </div>
                 </li>`;
             }
@@ -42,6 +49,18 @@ function initPage(num) {
             });
         }
     });
+}
+
+function browsenum() {
+  $(document).on('click','.browsenum',function(){
+    let id = $(this).attr('data-id')
+    checkBrowsenum({app_id:id}).done(res => {
+      if (res.success) {
+        const num = res.data.length
+        $(this).context.innerHTML = num
+      }
+    });
+  })
 }
 
 // 删除
@@ -147,6 +166,7 @@ $(function(){
     initPage(1, 19);
     addNewPage();
     delPage();
+    browsenum()
 
     $('.pagelist').on('page', function(e, obj){
         console.log(obj);

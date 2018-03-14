@@ -1,5 +1,11 @@
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:23:56
+*/
 import * as db from '../localSave/indexedDB.js'; // indexedDB
-import {uploadImgBase64, saveData} from '../server/ajax';
+import {uploadImgBase64, saveData,addBrowseNum} from '../server/ajax';
 import {AppDataChange} from './AppDataFun';
 import {loadArr} from '../conf/loading';
 import {sliderAnimate} from '../conf/sliderAnimate';
@@ -56,7 +62,7 @@ export function appToHtmlFile(app) {
         <!doctype html>
         <html>
         <head>
-            <title>${app.name}</title>
+            <title>${app.name} ee</title>
             <meta name="description" content="${app.info}">
             <meta name="keywords" content="${app.info}">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,6 +94,14 @@ export function appToHtmlFile(app) {
             var sliderAnimate = ${ JSON.stringify(sliderAnimate[app.slider.animate]) || '{}'};
             
             let backlink = ${JSON.stringify(app.backlink) || false}
+            
+            $.ajax({
+              type: 'post',
+              url: 'http://localhost:8000/api/addBrowseNum',
+              data: {'app_id':${JSON.stringify(app)}.app_id},
+              dataType: 'json'
+          });
+              
             function pushHistory() {  
                var state = {  
                    title: "title",  
@@ -95,21 +109,18 @@ export function appToHtmlFile(app) {
                };  
                window.history.pushState(state, "title", "#");  
             }  
-            
             if(backlink){
               if(window.history.length === 1){
                 pushHistory();  
               }
             }
-            
             setTimeout(function(){
               window.addEventListener('popstate',function(e) {
-                location.href = backlink; 
+                if(backlink){
+                  location.href = backlink; 
+                }
               })
             },300)
-            
-            
-            
             </script>
             
             <script src="/assets/js/app.js"></script>
@@ -293,6 +304,9 @@ export function eventAppViewShow(self) {
   // 发布
   $('#appViewShow').on('click', '#publishApp', function () {
 
+  console.log(addBrowseNum)
+
+
     let load = $.loading({
       tip: 'H5生成中，请耐心等待！'
     });
@@ -306,6 +320,9 @@ export function eventAppViewShow(self) {
       return;
     }
 
+    console.log('AppData',appid)
+    AppData.data.app_id = appid
+
 
     saveData({
       id: appid,
@@ -315,6 +332,7 @@ export function eventAppViewShow(self) {
       des: AppData.data.info,
       data: JSON.stringify(AppData.data),
       shtml: appToHtmlFile(AppData.data),
+      backlink:AppData.data.backlink
     }).done(res => {
       if (res.success) {
         $.tip();
@@ -449,8 +467,7 @@ function resetAppData(objs, allRes) {
  * AppData.data 组合成HTML代码
  */
 export function appToHTML() {
-  console.log(111111)
-  console.log(AppData);
+
 
   return new Promise((resolve1, reject1) => {
 
@@ -491,7 +508,6 @@ export function appToHTML() {
         resetAppData(objs, allRes);
         resolve1(true);
       });
-
     });
 
   });
