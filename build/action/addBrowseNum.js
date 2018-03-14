@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 10:19:25
+* @Last Modified time: 2018-03-14 11:04:09
 */
 
 var Sequelize = require('sequelize');
@@ -15,7 +15,7 @@ exports.addBrowseNum = function(req, res) {
 
   createSQL({
     obj: {
-      usernum: 0,
+      id: 0,
       app_id: req.body.app_id,
     },
     sequeObj: {
