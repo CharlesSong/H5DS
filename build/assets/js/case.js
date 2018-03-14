@@ -7488,7 +7488,7 @@ function initPage(num) {
 
 
 function browsenum() {
-    $(document).on('click', '.browsenum', function () {
+    $(document).trigger('click', '.browsenum', function () {
         var _this = this;
 
         var id = $(this).attr('data-id');
