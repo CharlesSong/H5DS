@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 12:04:45
+* @Last Modified time: 2018-03-14 12:10:21
 */
 
 /**
@@ -38,7 +38,7 @@ function initPage(num) {
                         <div class="desc">${d.des}</div>
                         <a href="/edit?id=${d.id}&owner=${d.owner}">编辑</a>
                         <a class="to-del" data-name="${d.name}" data-id="${d.id}">删除</a>
-                        <i class="browsenum"  data-id="${d.id}">浏览量</i>
+                        <i class="browsenum"  data-id="${d.id}">访问量:0</i>
                     </div>
                 </li>`;
       }
@@ -56,7 +56,6 @@ function initPage(num) {
 
 function browsenum() {
   window.onload = function () {
-
     setTimeout(function () {
       let browsenumLen = $('.browsenum').length
       console.log(browsenumLen)
@@ -70,10 +69,8 @@ function browsenum() {
           }
         });
       })
-    }, 0)
+    }, 300)
   }
-
-
 }
 
 function checkBNum() {
@@ -82,7 +79,7 @@ function checkBNum() {
     checkBrowsenum({app_id: id}).done(res => {
       if (res.success) {
         const num = res.data.length
-        $(this).context.innerHTML = num
+        $(this).context.innerHTML = '访问量：' + num
       }
     });
   })
