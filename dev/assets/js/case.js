@@ -48,7 +48,7 @@ function initPage(num) {
 }
 
 function browsenum() {
-  $(document).on('click','.browsenum',function(){
+  $(document).trigger('click','.browsenum',function(){
     let id = $(this).attr('data-id')
     checkBrowsenum({app_id:id}).done(res => {
       if (res.success) {
