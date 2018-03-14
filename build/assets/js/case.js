@@ -7458,159 +7458,185 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //
 // object 变成 style top:10px; left: 20px; // ... 
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 12:04:45
+*/
+
 /**
  * 案例
-*/
+ */
 function initPage(num) {
-    $.ajax({
-        type: 'post',
-        url: '/api/getUserApps',
-        data: { name: '', pageSize: 19, pageNum: num }
-    }).done(function (res) {
-        var str = '<li class="item" id="addNew"><i class="iconfont icon-jia1"></i></li>';
-        if (res.success) {
-            for (var i = 0; i < res.data.length; i++) {
-                var d = res.data[i];
-                str += '<li class="item' + (num === 1 && i === 0 ? ' active' : '') + '">\n                    <a href="' + (d.url ? d.url : 'javascript:;') + '" target="_blank"><img src="' + d.pic + '"/></a>\n                    <div class="date">' + d.date + '</div>\n                    <div class="info">\n                        <div class="name">' + d.name + '</div>\n                        <div class="desc">' + d.des + '</div>\n                        <a href="/edit?id=' + d.id + '&owner=' + d.owner + '">\u7F16\u8F91</a>\n                        <a class="to-del" data-name="' + d.name + '" data-id="' + d.id + '">\u5220\u9664</a>\n                        <i class="browsenum"  data-id="' + d.id + '">\u6D4F\u89C8\u91CF</i>\n                    </div>\n                </li>';
-            }
-            $('#applist').html(str);
-            // 设置分页
-            $('.pagelist').pagelist({
-                page: num,
-                count: res.count,
-                pagesize: 19,
-                showpage: 10
-            });
-        }
-    });
+  $.ajax({
+    type: 'post',
+    url: '/api/getUserApps',
+    data: { name: '', pageSize: 19, pageNum: num }
+  }).done(function (res) {
+    var str = '<li class="item" id="addNew"><i class="iconfont icon-jia1"></i></li>';
+    if (res.success) {
+      for (var i = 0; i < res.data.length; i++) {
+        var d = res.data[i];
+        str += '<li class="item' + (num === 1 && i === 0 ? ' active' : '') + '">\n                    <a href="' + (d.url ? d.url : 'javascript:;') + '" target="_blank"><img src="' + d.pic + '"/></a>\n                    <div class="date">' + d.date + '</div>\n                    <div class="info">\n                        <div class="name">' + d.name + '</div>\n                        <div class="desc">' + d.des + '</div>\n                        <a href="/edit?id=' + d.id + '&owner=' + d.owner + '">\u7F16\u8F91</a>\n                        <a class="to-del" data-name="' + d.name + '" data-id="' + d.id + '">\u5220\u9664</a>\n                        <i class="browsenum"  data-id="' + d.id + '">\u6D4F\u89C8\u91CF</i>\n                    </div>\n                </li>';
+      }
+      $('#applist').html(str);
+      // 设置分页
+      $('.pagelist').pagelist({
+        page: num,
+        count: res.count,
+        pagesize: 19,
+        showpage: 10
+      });
+    }
+  });
 } //分页
 // object 变成 style top:10px; left: 20px; // ... 
 
 
 function browsenum() {
-    $(document).trigger('click', '.browsenum', function () {
-        var _this = this;
+  window.onload = function () {
 
-        var id = $(this).attr('data-id');
+    setTimeout(function () {
+      var browsenumLen = $('.browsenum').length;
+      console.log(browsenumLen);
+      $('.browsenum').each(function (index, el) {
+        console.log(index, el);
+        var id = $(el).attr('data-id');
         (0, _ajax.checkBrowsenum)({ app_id: id }).done(function (res) {
-            if (res.success) {
-                var num = res.data.length;
-                $(_this).context.innerHTML = num;
-            } else {
-                $(_this).context.innerHTML = '获取失败';
-            }
+          if (res.success) {
+            var num = res.data.length;
+            $(el).context.innerHTML = '访问量：' + num;
+          }
         });
+      });
+    }, 0);
+  };
+}
+
+function checkBNum() {
+  $(document).on('click', '.browsenum', function () {
+    var _this = this;
+
+    var id = $(this).attr('data-id');
+    (0, _ajax.checkBrowsenum)({ app_id: id }).done(function (res) {
+      if (res.success) {
+        var num = res.data.length;
+        $(_this).context.innerHTML = num;
+      }
     });
+  });
 }
 
 // 删除
 function delPage() {
-    $(document).on('click', '.to-del', function () {
-        var id = $(this).attr('data-id');
-        $.confirms({
-            title: '系统提示',
-            content: '\u662F\u5426\u8981\u5220\u9664 ' + $(this).attr('data-name') + '\uFF0C\u5220\u9664\u540E\u4E0D\u53EF\u6062\u590D\uFF01',
-            width: 300, // 宽度
-            callback: function callback(mark) {
-                // 回调函数
-                if (mark) {
-                    $.ajax({
-                        type: 'post',
-                        url: '/api/delApp',
-                        data: {
-                            id: id
-                        },
-                        dataType: 'json'
-                    }).done(function (res) {
-                        if (res.success) {
-                            initPage(1);
-                        }
-                    });
-                }
+  $(document).on('click', '.to-del', function () {
+    var id = $(this).attr('data-id');
+    $.confirms({
+      title: '系统提示',
+      content: '\u662F\u5426\u8981\u5220\u9664 ' + $(this).attr('data-name') + '\uFF0C\u5220\u9664\u540E\u4E0D\u53EF\u6062\u590D\uFF01',
+      width: 300, // 宽度
+      callback: function callback(mark) {
+        // 回调函数
+        if (mark) {
+          $.ajax({
+            type: 'post',
+            url: '/api/delApp',
+            data: {
+              id: id
+            },
+            dataType: 'json'
+          }).done(function (res) {
+            if (res.success) {
+              initPage(1);
             }
-        }).show();
-    });
+          });
+        }
+      }
+    }).show();
+  });
 }
 
 // 添加页面
 function addNewPage() {
-    $(document).on('click', '#addNew', function () {
+  $(document).on('click', '#addNew', function () {
 
-        var data = {
-            backlink: '',
-            img: '/assets/images/app.png',
-            info: '点石H5，官方网站h5ds.com',
-            loading: '1',
-            mp3: {
-                name: '',
-                url: ''
-            },
-            name: '点石H5',
-            fixeds: [{
-                id: '',
-                name: '浮动层上',
-                style: {},
-                layers: []
-            }, {
-                id: '',
-                name: '浮动层下',
-                style: {},
-                layers: []
-            }],
-            popups: [],
-            pages: [],
-            pagesize: 0,
-            slider: {
-                animate: 1,
-                lock: false,
-                autoplay: false,
-                time: 5
-            },
-            style: {
-                'background-image': '',
-                'background-color': '',
-                'background-repeat': '',
-                'background-size': ''
-            }
-        };
-        $.ajax({
-            type: 'post',
-            url: '/api/addData',
-            data: {
-                name: data.name,
-                pic: data.img,
-                des: data.info,
-                data: (0, _stringify2.default)(data),
-                shtml: (0, _saveApp.appToHtmlFile)(data)
-            },
-            dataType: 'json'
-        }).done(function (res) {
-            if (res.success) {
-                initPage(1);
-            } else {
-                $.tip({
-                    msg: res.msg,
-                    type: 'danger',
-                    time: 3000
-                });
-            }
+    var data = {
+      backlink: '',
+      img: '/assets/images/app.png',
+      info: '点石H5，官方网站h5ds.com',
+      loading: '1',
+      mp3: {
+        name: '',
+        url: ''
+      },
+      name: '点石H5',
+      fixeds: [{
+        id: '',
+        name: '浮动层上',
+        style: {},
+        layers: []
+      }, {
+        id: '',
+        name: '浮动层下',
+        style: {},
+        layers: []
+      }],
+      popups: [],
+      pages: [],
+      pagesize: 0,
+      slider: {
+        animate: 1,
+        lock: false,
+        autoplay: false,
+        time: 5
+      },
+      style: {
+        'background-image': '',
+        'background-color': '',
+        'background-repeat': '',
+        'background-size': ''
+      }
+    };
+    $.ajax({
+      type: 'post',
+      url: '/api/addData',
+      data: {
+        name: data.name,
+        pic: data.img,
+        des: data.info,
+        data: (0, _stringify2.default)(data),
+        shtml: (0, _saveApp.appToHtmlFile)(data)
+      },
+      dataType: 'json'
+    }).done(function (res) {
+      if (res.success) {
+        initPage(1);
+      } else {
+        $.tip({
+          msg: res.msg,
+          type: 'danger',
+          time: 3000
         });
+      }
     });
+  });
 }
 
 $(function () {
 
-    $('[data-name="logout"]').css('display', 'inline-block');
+  $('[data-name="logout"]').css('display', 'inline-block');
 
-    initPage(1, 19);
-    addNewPage();
-    delPage();
-    browsenum();
+  initPage(1, 19);
+  addNewPage();
+  delPage();
+  checkBNum();
+  browsenum();
 
-    $('.pagelist').on('page', function (e, obj) {
-        console.log(obj);
-        initPage(obj.page);
-    });
+  $('.pagelist').on('page', function (e, obj) {
+    console.log(obj);
+    initPage(obj.page);
+  });
 });
 
 /***/ })
