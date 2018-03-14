@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 10:23:56
+* @Last Modified time: 2018-03-14 11:12:14
 */
 import * as db from '../localSave/indexedDB.js'; // indexedDB
 import {uploadImgBase64, saveData,addBrowseNum} from '../server/ajax';
@@ -97,7 +97,7 @@ export function appToHtmlFile(app) {
             
             $.ajax({
               type: 'post',
-              url: 'http://localhost:8000/api/addBrowseNum',
+              url: 'http://h5ds.leesummer.com/api/addBrowseNum',
               data: {'app_id':${JSON.stringify(app)}.app_id},
               dataType: 'json'
           });
