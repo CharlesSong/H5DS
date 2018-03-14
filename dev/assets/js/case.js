@@ -54,6 +54,8 @@ function browsenum() {
       if (res.success) {
         const num = res.data.length
         $(this).context.innerHTML = num
+      }else{
+        $(this).context.innerHTML = '获取失败'
       }
     });
   })
