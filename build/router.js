@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 10:19:36
+* @Last Modified time: 2018-03-14 10:29:08
 */
 
 var { upload, uploadBase64 } = require('./action/upload.js');
@@ -19,7 +19,7 @@ var { getUserTpls, delUserTpls, addUserTpls } = require('./action/userTpls.js');
 var { saveData } = require('./action/saveData.js'); // 保存app 
 var { getUserApps, getUserApp, delApp, addData } = require('./action/userApp.js'); // 
 var { imgCode } = require('./action/imgCode.js'); // 验证码
-var {setBackLink} = require('./action/setBacLink.js') // 设置返回链接
+var {setBackLink} = require('./action/setBackLink.js') // 设置返回链接
 var {addBrowseNum} = require('./action/addBrowseNum.js') // 新增浏览量
 var {checkBrowsenum} = require('./action/checkBrowsenum.js') // 新增浏览量
 
