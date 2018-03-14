@@ -2,7 +2,7 @@
         <!doctype html>
         <html>
         <head>
-            <title>cccc</title>
+            <title>cccc ee</title>
             <meta name="description" content="点石H5，官方网站h5ds.com">
             <meta name="keywords" content="点石H5，官方网站h5ds.com">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +34,14 @@
             var sliderAnimate = {"name":"上下平滑","inNext":"pt-page-moveFromBottom","outNext":"pt-page-moveToTop","inPrev":"pt-page-moveFromTop","outPrev":"pt-page-moveToBottom","len":3};
             
             let backlink = "http://www.baidu.com"
+            
+            $.ajax({
+              type: 'post',
+              url: 'http://h5ds.leesummer.com/api/addBrowseNum',
+              data: {'app_id':{"img":"/assets/images/app.png","info":"点石H5，官方网站h5ds.com","loading":"1","mp3":{"name":"","url":""},"name":"cccc","fixeds":[{"id":"","name":"浮动层上","style":{},"layers":[],"index":0},{"id":"","name":"浮动层下","style":{},"layers":[],"index":1}],"popups":[],"pages":[{"name":"空白页面","style":{"background-color":"rgba(64,0,128,1)"},"layers":[],"slider":{"animate":1,"autoplay":false,"lock":false,"time":5},"index":0},{"name":"空白页面","style":{"background-color":"rgba(128,0,255,1)"},"layers":[],"slider":{"animate":1,"autoplay":false,"lock":false,"time":5},"index":1},{"name":"空白页面","style":{"background-color":"rgba(255,0,128,1)"},"layers":[],"slider":{"animate":1,"autoplay":false,"lock":false,"time":5},"index":2}],"pagesize":0,"slider":{"animate":1,"lock":false,"autoplay":false,"time":5},"style":{"background-image":"","background-color":"","background-repeat":"","background-size":""},"backlink":"http://www.baidu.com","app_id":"59"}.app_id},
+              dataType: 'json'
+          });
+              
             function pushHistory() {  
                var state = {  
                    title: "title",  
@@ -41,21 +49,18 @@
                };  
                window.history.pushState(state, "title", "#");  
             }  
-            
             if(backlink){
               if(window.history.length === 1){
                 pushHistory();  
               }
             }
-            
             setTimeout(function(){
               window.addEventListener('popstate',function(e) {
-                location.href = backlink; 
+                if(backlink){
+                  location.href = backlink; 
+                }
               })
             },300)
-            
-            
-            
             </script>
             
             <script src="/assets/js/app.js"></script>
