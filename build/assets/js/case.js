@@ -7496,6 +7496,8 @@ function browsenum() {
             if (res.success) {
                 var num = res.data.length;
                 $(_this).context.innerHTML = num;
+            } else {
+                $(_this).context.innerHTML = '获取失败';
             }
         });
     });

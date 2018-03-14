@@ -2,7 +2,7 @@
         <!doctype html>
         <html>
         <head>
-            <title>点石H5</title>
+            <title>点石H5 ee</title>
             <meta name="description" content="点石H5，官方网站h5ds.com">
             <meta name="keywords" content="点石H5，官方网站h5ds.com">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +34,14 @@
             var sliderAnimate = {"name":"上下平滑","inNext":"pt-page-moveFromBottom","outNext":"pt-page-moveToTop","inPrev":"pt-page-moveFromTop","outPrev":"pt-page-moveToBottom","len":0};
             
             let backlink = ""
+            
+            $.ajax({
+              type: 'post',
+              url: 'http://localhost:8000/api/addBrowseNum',
+              data: {'app_id':{"backlink":"","img":"/assets/images/app.png","info":"点石H5，官方网站h5ds.com","loading":"1","mp3":{"name":"","url":""},"name":"点石H5","fixeds":[{"id":"","name":"浮动层上","style":{},"layers":[],"index":0},{"id":"","name":"浮动层下","style":{},"layers":[],"index":1}],"popups":[],"pages":[],"pagesize":0,"slider":{"animate":1,"lock":false,"autoplay":false,"time":5},"style":{"background-image":"","background-color":"","background-repeat":"","background-size":""},"app_id":"64"}.app_id},
+              dataType: 'json'
+          });
+              
             function pushHistory() {  
                var state = {  
                    title: "title",  
@@ -41,21 +49,18 @@
                };  
                window.history.pushState(state, "title", "#");  
             }  
-            
             if(backlink){
               if(window.history.length === 1){
                 pushHistory();  
               }
             }
-            
             setTimeout(function(){
               window.addEventListener('popstate',function(e) {
-                location.href = backlink; 
+                if(backlink){
+                  location.href = backlink; 
+                }
               })
             },300)
-            
-            
-            
             </script>
             
             <script src="/assets/js/app.js"></script>
