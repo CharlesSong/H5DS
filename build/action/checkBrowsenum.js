@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 11:02:06
+* @Last Modified time: 2018-03-14 14:14:55
 */
 var { result } = require('../lib/result');
 var { readSQL } = require('../sql/readSQL');
@@ -27,7 +27,6 @@ exports.checkBrowsenum = function(req, res) {
     },
     callBack: (ret) => {
       if (ret) {
-        console.log('111111',ret)
         result(req, res, {
           code: 200,
           data: ret,
@@ -35,7 +34,6 @@ exports.checkBrowsenum = function(req, res) {
           success: true
         });
       } else {
-        console.log('error 222')
         result(req, res, {
           code: 500,
           data: ret,
