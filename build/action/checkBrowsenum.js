@@ -2,7 +2,7 @@
 * @Author: summerstarlee
 * @Date:   2018-03-14 10:18:05
 * @Last Modified by:   summerstarlee
-* @Last Modified time: 2018-03-14 10:18:43
+* @Last Modified time: 2018-03-14 10:57:48
 */
 var { result } = require('../lib/result');
 var { readSQL } = require('../sql/readSQL');
@@ -11,9 +11,6 @@ var Sequelize = require('sequelize');
 
 // 新建app
 exports.checkBrowsenum = function(req, res) {
-
-  console.log('addBrowseNum',req.body)
-  console.log('222222222',req.body)
 
   readSQL({
     req:req,
@@ -28,7 +25,7 @@ exports.checkBrowsenum = function(req, res) {
     },
     callBack: (ret) => {
       if (ret) {
-        console.log('111111',ret.rows,ret.count)
+        console.log('111111',ret)
         result(req, res, {
           code: 200,
           data: ret,
