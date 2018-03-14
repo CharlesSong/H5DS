@@ -1007,7 +1007,211 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 87 */,
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getSysImgTypes = getSysImgTypes;
+exports.saveData = saveData;
+exports.setBackLink = setBackLink;
+exports.addBrowseNum = addBrowseNum;
+exports.checkBrowsenum = checkBrowsenum;
+exports.getSysTpls = getSysTpls;
+exports.getSysTplsTypes = getSysTplsTypes;
+exports.getUserTpls = getUserTpls;
+exports.addUserTpls = addUserTpls;
+exports.delUserTpls = delUserTpls;
+exports.getSysImgs = getSysImgs;
+exports.getAppData = getAppData;
+exports.getUserImgs = getUserImgs;
+exports.getMp3 = getMp3;
+exports.uploadImgBase64 = uploadImgBase64;
+exports.delImg = delImg;
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:22:54
+*/
+
+// 获取图片素材分类
+function getSysImgTypes() {
+    return $.ajax({
+        type: 'post',
+        url: '/api/getSysImgTypes',
+        dataType: 'json'
+    });
+}
+
+// 保存APP
+// obj : { name: '', pageSize: 20, pageNum: 1 }
+function saveData(obj) {
+    console.log('saveData', obj);
+    return $.ajax({
+        type: 'post',
+        url: '/api/saveData',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+//设置backlink的值
+// obj:{id:'',uid:'',backlink:''}
+function setBackLink(obj) {
+    console.log('setBackLink', obj);
+    return $.ajax({
+        type: 'post',
+        url: 'api/setBackLink',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+function addBrowseNum(obj) {
+    console.log('addBrowseNum', obj);
+    return $.ajax({
+        type: 'post',
+        url: 'api/addBrowseNum',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+function checkBrowsenum(obj) {
+    console.log('browsenum', obj);
+    return $.ajax({
+        type: 'post',
+        url: 'api/checkBrowsenum',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+// 获取模板素材
+// obj : { name: '', pageSize: 20, pageNum: 1 }
+function getSysTpls(obj) {
+    return $.ajax({
+        type: 'post',
+        url: '/api/getSysTpls',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+// 获取模板素材分类
+function getSysTplsTypes() {
+    return $.ajax({
+        type: 'post',
+        url: '/api/getSysTplsTypes',
+        dataType: 'json'
+    });
+}
+
+// 获取我的模板
+function getUserTpls(data) {
+    return $.ajax({
+        data: data,
+        type: 'post',
+        url: '/api/getUserTpls',
+        dataType: 'json'
+    });
+}
+
+// 添加我的模板
+function addUserTpls(data) {
+    return $.ajax({
+        data: data,
+        type: 'post',
+        url: '/api/addUserTpls',
+        dataType: 'json'
+    });
+}
+
+// 删除我的模板
+function delUserTpls(data) {
+    return $.ajax({
+        data: data,
+        type: 'post',
+        url: '/api/delUserTpls',
+        dataType: 'json'
+    });
+}
+
+// 获取图片素材
+// obj : { name: '', pageSize: 20, pageNum: 1 }
+function getSysImgs(obj) {
+    return $.ajax({
+        type: 'post',
+        url: '/api/getSysImgs',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+// 获取app json
+// obj : { appid: 1 }
+function getAppData(obj) {
+    //获取APP对象
+    return $.ajax({
+        type: 'post',
+        url: '/api/getUserApp',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+// 获取我的图片
+// obj : { pageSize: 20, pageNum: 1 }
+function getUserImgs(obj) {
+    return $.ajax({
+        type: 'post',
+        url: '/api/getUserImgs',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+// 获取音乐
+// obj : { pageSize: 20, pageNum: 1 }
+function getMp3(obj) {
+    return $.ajax({
+        type: 'post',
+        url: '/api/getMp3',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+// 上传图片
+// obj : { imgData: xx}
+function uploadImgBase64(obj) {
+    return $.ajax({
+        type: 'post',
+        url: '/api/uploadBase64',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+/**
+ * @desc 删除用户图片
+ * @param id 图片ID
+*/
+function delImg(obj) {
+    return $.ajax({
+        type: 'post',
+        url: '/api/delUserImgs',
+        data: obj,
+        dataType: 'json'
+    });
+}
+
+/***/ }),
 /* 88 */,
 /* 89 */,
 /* 90 */,
@@ -1021,7 +1225,8 @@ module.exports = function (it) {
 /* 98 */,
 /* 99 */,
 /* 100 */,
-/* 101 */
+/* 101 */,
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1173,7 +1378,7 @@ function uniqendLayer(self, data) {
 }
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1197,7 +1402,7 @@ __webpack_require__(83)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1368,7 +1573,7 @@ function clearData(storename) {
 }
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
@@ -1397,7 +1602,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx = __webpack_require__(41);
@@ -1428,13 +1633,13 @@ exports.RETURN = RETURN;
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(264), __esModule: true };
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1457,7 +1662,7 @@ exports.default = function (self, call) {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1494,168 +1699,6 @@ exports.default = function (subClass, superClass) {
   });
   if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
 };
-
-/***/ }),
-/* 109 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.getSysImgTypes = getSysImgTypes;
-exports.saveData = saveData;
-exports.getSysTpls = getSysTpls;
-exports.getSysTplsTypes = getSysTplsTypes;
-exports.getUserTpls = getUserTpls;
-exports.addUserTpls = addUserTpls;
-exports.delUserTpls = delUserTpls;
-exports.getSysImgs = getSysImgs;
-exports.getAppData = getAppData;
-exports.getUserImgs = getUserImgs;
-exports.getMp3 = getMp3;
-exports.uploadImgBase64 = uploadImgBase64;
-exports.delImg = delImg;
-// 获取图片素材分类
-function getSysImgTypes() {
-    return $.ajax({
-        type: 'post',
-        url: '/api/getSysImgTypes',
-        dataType: 'json'
-    });
-}
-
-// 保存APP
-// obj : { name: '', pageSize: 20, pageNum: 1 }
-function saveData(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/saveData',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-// 获取模板素材
-// obj : { name: '', pageSize: 20, pageNum: 1 }
-function getSysTpls(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/getSysTpls',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-// 获取模板素材分类
-function getSysTplsTypes() {
-    return $.ajax({
-        type: 'post',
-        url: '/api/getSysTplsTypes',
-        dataType: 'json'
-    });
-}
-
-// 获取我的模板
-function getUserTpls(data) {
-    return $.ajax({
-        data: data,
-        type: 'post',
-        url: '/api/getUserTpls',
-        dataType: 'json'
-    });
-}
-
-// 添加我的模板
-function addUserTpls(data) {
-    return $.ajax({
-        data: data,
-        type: 'post',
-        url: '/api/addUserTpls',
-        dataType: 'json'
-    });
-}
-
-// 删除我的模板
-function delUserTpls(data) {
-    return $.ajax({
-        data: data,
-        type: 'post',
-        url: '/api/delUserTpls',
-        dataType: 'json'
-    });
-}
-
-// 获取图片素材
-// obj : { name: '', pageSize: 20, pageNum: 1 }
-function getSysImgs(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/getSysImgs',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-// 获取app json
-// obj : { appid: 1 }
-function getAppData(obj) {
-    //获取APP对象
-    return $.ajax({
-        type: 'post',
-        url: '/api/getUserApp',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-// 获取我的图片
-// obj : { pageSize: 20, pageNum: 1 }
-function getUserImgs(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/getUserImgs',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-// 获取音乐
-// obj : { pageSize: 20, pageNum: 1 }
-function getMp3(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/getMp3',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-// 上传图片
-// obj : { imgData: xx}
-function uploadImgBase64(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/uploadBase64',
-        data: obj,
-        dataType: 'json'
-    });
-}
-
-/**
- * @desc 删除用户图片
- * @param id 图片ID
-*/
-function delImg(obj) {
-    return $.ajax({
-        type: 'post',
-        url: '/api/delUserImgs',
-        data: obj,
-        dataType: 'json'
-    });
-}
 
 /***/ }),
 /* 110 */
@@ -2481,7 +2524,7 @@ module.exports = function (it) {
 /* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(104);
+var classof = __webpack_require__(105);
 var ITERATOR = __webpack_require__(11)('iterator');
 var Iterators = __webpack_require__(42);
 module.exports = __webpack_require__(13).getIteratorMethod = function (it) {
@@ -2519,7 +2562,7 @@ exports.convertBase64UrlToBlob = convertBase64UrlToBlob;
 exports.base64ToUrl = base64ToUrl;
 exports.initCrop = initCrop;
 
-var _indexedDB = __webpack_require__(103);
+var _indexedDB = __webpack_require__(104);
 
 var db = _interopRequireWildcard(_indexedDB);
 
@@ -3911,7 +3954,7 @@ var _layerSetUeTpl = __webpack_require__(274);
 
 var _cssFilter = __webpack_require__(177);
 
-var _layerFun = __webpack_require__(101);
+var _layerFun = __webpack_require__(102);
 
 var _AppDataFun = __webpack_require__(10);
 
@@ -4247,7 +4290,7 @@ module.exports = { "default": __webpack_require__(230), __esModule: true };
 /* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(102);
+__webpack_require__(103);
 __webpack_require__(117);
 module.exports = __webpack_require__(118).f('iterator');
 
@@ -4575,7 +4618,7 @@ __webpack_require__(119)('observable');
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(121);
-__webpack_require__(102);
+__webpack_require__(103);
 __webpack_require__(117);
 __webpack_require__(239);
 __webpack_require__(242);
@@ -4592,12 +4635,12 @@ module.exports = __webpack_require__(13).Promise;
 var LIBRARY = __webpack_require__(72);
 var global = __webpack_require__(14);
 var ctx = __webpack_require__(41);
-var classof = __webpack_require__(104);
+var classof = __webpack_require__(105);
 var $export = __webpack_require__(20);
 var isObject = __webpack_require__(23);
 var aFunction = __webpack_require__(69);
 var anInstance = __webpack_require__(158);
-var forOf = __webpack_require__(105);
+var forOf = __webpack_require__(106);
 var speciesConstructor = __webpack_require__(179);
 var task = __webpack_require__(180).set;
 var microtask = __webpack_require__(241)();
@@ -5099,7 +5142,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ImgLayer = undefined;
 
-var _getPrototypeOf = __webpack_require__(106);
+var _getPrototypeOf = __webpack_require__(107);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5107,11 +5150,11 @@ var _createClass2 = __webpack_require__(63);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(107);
+var _possibleConstructorReturn2 = __webpack_require__(108);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(108);
+var _inherits2 = __webpack_require__(109);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -6107,7 +6150,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TextLayer = undefined;
 
-var _getPrototypeOf = __webpack_require__(106);
+var _getPrototypeOf = __webpack_require__(107);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6115,11 +6158,11 @@ var _createClass2 = __webpack_require__(63);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(107);
+var _possibleConstructorReturn2 = __webpack_require__(108);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(108);
+var _inherits2 = __webpack_require__(109);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -6612,11 +6655,11 @@ exports.appToHtmlFile = appToHtmlFile;
 exports.eventAppViewShow = eventAppViewShow;
 exports.appToHTML = appToHTML;
 
-var _indexedDB = __webpack_require__(103);
+var _indexedDB = __webpack_require__(104);
 
 var db = _interopRequireWildcard(_indexedDB);
 
-var _ajax = __webpack_require__(109);
+var _ajax = __webpack_require__(87);
 
 var _AppDataFun = __webpack_require__(10);
 
@@ -6638,6 +6681,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @desc 将AppData里面的 img 单独拿出来
  * @param data 也就是 传入一个 app 对象
  */
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:23:56
+*/
 function getAppDataImgs(data) {
   var arr = [];
   var pages = data.pages;
@@ -6679,7 +6728,7 @@ function appToHtmlFile(app) {
   var fixedUp = app.fixeds[0];
   var fixedDown = app.fixeds[1];
 
-  return '\n        <!doctype html>\n        <html>\n        <head>\n            <title>' + app.name + '</title>\n            <meta name="description" content="' + app.info + '">\n            <meta name="keywords" content="' + app.info + '">\n            <meta http-equiv="X-UA-Compatible" content="IE=edge">\n            <meta name="format-detection" content="telephone=no" />\n            <meta name="format-detection" content="email=no" />\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <meta name="apple-mobile-web-app-status-bar-style" content="black" />\n            <meta http-equiv="Cache-Control" content="no-cache" />\n            <meta name="x5-fullscreen" content="true">\n            <meta name="x5-orientation" content="portrait">\n            <meta name="x5-page-mode" content="app">\n            <meta charset="utf-8">\n            <script src="/assets/plugin/h5ds.screen.js"></script>\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <!-- Set render engine for 360 browser -->\n            <meta name="renderer" content="webkit">\n            <!-- No Baidu Siteapp-->\n            <meta http-equiv="Cache-Control" content="no-siteapp" />\n            <link rel="stylesheet" type="text/css" href="/assets/css/app.css">\n            <link rel="stylesheet" type="text/css" href="/assets/font/iconfont.css">\n            <link rel="stylesheet" type="text/css" href="/assets/plugin/h5ds.app.css">\n            <!--js-->\n            <script src="/assets/plugin/jquery-2.1.1.js"></script>\n            <script src="/assets/plugin/jquery.qrcode.min.js"></script>\n            ' + (types.map ? '<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=b10045abfc1d4d22446efdc74f85c238"></script>' : '') + '\n            <script src="/assets/plugin/jquery.touchSwipe.min.js"></script>\n            <script>\n            var IMG_SOURCE = ' + ((0, _stringify2.default)(getAppDataImgs(app)) || '[]') + ';\n            var sliderAnimate = ' + ((0, _stringify2.default)(_sliderAnimate.sliderAnimate[app.slider.animate]) || '{}') + ';\n            \n            let backlink = ' + ((0, _stringify2.default)(app.backlink) || false) + '\n            function pushHistory() {  \n               var state = {  \n                   title: "title",  \n                   url: "#"  \n               };  \n               window.history.pushState(state, "title", "#");  \n            }  \n            \n            if(backlink){\n              if(window.history.length === 1){\n                pushHistory();  \n              }\n            }\n            \n            setTimeout(function(){\n              window.addEventListener(\'popstate\',function(e) {\n                location.href = backlink; \n              })\n            },300)\n            \n            \n            \n            </script>\n            \n            <script src="/assets/js/app.js"></script>\n        </head>\n        <body ondragstart="return false">\n            ' + (app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : '') + '\n            ' + (app.mp3.url ? '<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="' + app.mp3.url + '" loop="loop"></audio>' : '') + '\n            <div id="h5dsPopups">' + (0, _saveAppHtml.popupHtml)(app.popups) + '</div>\n            <div id="h5dsFixedsUp">' + (0, _saveAppHtml.fixedUpHtml)(fixedUp) + '</div>\n            <div id="h5dsFixedsDown">' + (0, _saveAppHtml.fixedDownHtml)(fixedDown) + '</div>\n            <div class="h5ds-loading" id="h5dsLoading">\n                <div class="h5ds-loadinner">\n                    ' + _loading.loadArr[app.loading] + '\n                    <div class="h5ds-progress" id="h5dsProgress">0</div>\n                </div>\n            </div>\n            <div id="h5dsSwiper" pages-length="' + app.pages.length + '" class="h5ds-swiper" style="' + $.toStyle(app.style) + '">' + (0, _saveAppHtml.pageHtml)(app.pages) + '</div>\n        </body>\n        </html>';
+  return '\n        <!doctype html>\n        <html>\n        <head>\n            <title>' + app.name + ' ee</title>\n            <meta name="description" content="' + app.info + '">\n            <meta name="keywords" content="' + app.info + '">\n            <meta http-equiv="X-UA-Compatible" content="IE=edge">\n            <meta name="format-detection" content="telephone=no" />\n            <meta name="format-detection" content="email=no" />\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <meta name="apple-mobile-web-app-status-bar-style" content="black" />\n            <meta http-equiv="Cache-Control" content="no-cache" />\n            <meta name="x5-fullscreen" content="true">\n            <meta name="x5-orientation" content="portrait">\n            <meta name="x5-page-mode" content="app">\n            <meta charset="utf-8">\n            <script src="/assets/plugin/h5ds.screen.js"></script>\n            <meta name="apple-mobile-web-app-capable" content="yes" />\n            <!-- Set render engine for 360 browser -->\n            <meta name="renderer" content="webkit">\n            <!-- No Baidu Siteapp-->\n            <meta http-equiv="Cache-Control" content="no-siteapp" />\n            <link rel="stylesheet" type="text/css" href="/assets/css/app.css">\n            <link rel="stylesheet" type="text/css" href="/assets/font/iconfont.css">\n            <link rel="stylesheet" type="text/css" href="/assets/plugin/h5ds.app.css">\n            <!--js-->\n            <script src="/assets/plugin/jquery-2.1.1.js"></script>\n            <script src="/assets/plugin/jquery.qrcode.min.js"></script>\n            ' + (types.map ? '<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=b10045abfc1d4d22446efdc74f85c238"></script>' : '') + '\n            <script src="/assets/plugin/jquery.touchSwipe.min.js"></script>\n            <script>\n            var IMG_SOURCE = ' + ((0, _stringify2.default)(getAppDataImgs(app)) || '[]') + ';\n            var sliderAnimate = ' + ((0, _stringify2.default)(_sliderAnimate.sliderAnimate[app.slider.animate]) || '{}') + ';\n            \n            let backlink = ' + ((0, _stringify2.default)(app.backlink) || false) + '\n            \n            $.ajax({\n              type: \'post\',\n              url: \'http://localhost:8000/api/addBrowseNum\',\n              data: {\'app_id\':' + (0, _stringify2.default)(app) + '.app_id},\n              dataType: \'json\'\n          });\n              \n            function pushHistory() {  \n               var state = {  \n                   title: "title",  \n                   url: "#"  \n               };  \n               window.history.pushState(state, "title", "#");  \n            }  \n            if(backlink){\n              if(window.history.length === 1){\n                pushHistory();  \n              }\n            }\n            setTimeout(function(){\n              window.addEventListener(\'popstate\',function(e) {\n                if(backlink){\n                  location.href = backlink; \n                }\n              })\n            },300)\n            </script>\n            \n            <script src="/assets/js/app.js"></script>\n        </head>\n        <body ondragstart="return false">\n            ' + (app.mp3.url ? '<div class="h5ds-video-icon"><i></i><i></i><i></i><i></i></div>' : '') + '\n            ' + (app.mp3.url ? '<audio style="display:none; height:0;" autoplay="autoplay" id="h5dsBgMusic" preload="auto" src="' + app.mp3.url + '" loop="loop"></audio>' : '') + '\n            <div id="h5dsPopups">' + (0, _saveAppHtml.popupHtml)(app.popups) + '</div>\n            <div id="h5dsFixedsUp">' + (0, _saveAppHtml.fixedUpHtml)(fixedUp) + '</div>\n            <div id="h5dsFixedsDown">' + (0, _saveAppHtml.fixedDownHtml)(fixedDown) + '</div>\n            <div class="h5ds-loading" id="h5dsLoading">\n                <div class="h5ds-loadinner">\n                    ' + _loading.loadArr[app.loading] + '\n                    <div class="h5ds-progress" id="h5dsProgress">0</div>\n                </div>\n            </div>\n            <div id="h5dsSwiper" pages-length="' + app.pages.length + '" class="h5ds-swiper" style="' + $.toStyle(app.style) + '">' + (0, _saveAppHtml.pageHtml)(app.pages) + '</div>\n        </body>\n        </html>';
 }
 
 /**
@@ -6803,6 +6852,8 @@ function eventAppViewShow(self) {
   // 发布
   $('#appViewShow').on('click', '#publishApp', function () {
 
+    console.log(_ajax.addBrowseNum);
+
     var load = $.loading({
       tip: 'H5生成中，请耐心等待！'
     });
@@ -6816,6 +6867,9 @@ function eventAppViewShow(self) {
       return;
     }
 
+    console.log('AppData', appid);
+    AppData.data.app_id = appid;
+
     (0, _ajax.saveData)({
       id: appid,
       uid: $.getUrlData('owner'),
@@ -6823,7 +6877,8 @@ function eventAppViewShow(self) {
       pic: AppData.data.img,
       des: AppData.data.info,
       data: (0, _stringify2.default)(AppData.data),
-      shtml: appToHtmlFile(AppData.data)
+      shtml: appToHtmlFile(AppData.data),
+      backlink: AppData.data.backlink
     }).done(function (res) {
       if (res.success) {
         $.tip();
@@ -6962,8 +7017,6 @@ function resetAppData(objs, allRes) {
  * AppData.data 组合成HTML代码
  */
 function appToHTML() {
-  console.log(111111);
-  console.log(AppData);
 
   return new _promise2.default(function (resolve1, reject1) {
 
@@ -7397,12 +7450,21 @@ __webpack_require__(187);
 
 __webpack_require__(125);
 
+var _ajax = __webpack_require__(87);
+
 var _saveApp = __webpack_require__(293);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//分页
+//
 // object 变成 style top:10px; left: 20px; // ... 
+/*
+* @Author: summerstarlee
+* @Date:   2018-03-14 10:18:05
+* @Last Modified by:   summerstarlee
+* @Last Modified time: 2018-03-14 10:22:10
+* 案例
+*/
 function initPage(num) {
     $.ajax({
         type: 'post',
@@ -7413,7 +7475,7 @@ function initPage(num) {
         if (res.success) {
             for (var i = 0; i < res.data.length; i++) {
                 var d = res.data[i];
-                str += '<li class="item' + (num === 1 && i === 0 ? ' active' : '') + '">\n                    <a href="' + (d.url ? d.url : 'javascript:;') + '" target="_blank"><img src="' + d.pic + '"/></a>\n                    <div class="date">' + d.date + '</div>\n                    <div class="info">\n                        <div class="name">' + d.name + '</div>\n                        <div class="desc">' + d.des + '</div>\n                        <a href="/edit?id=' + d.id + '&owner=' + d.owner + '">\u7F16\u8F91</a>\n                        <a class="to-del" data-name="' + d.name + '" data-id="' + d.id + '">\u5220\u9664</a>\n                    </div>\n                </li>';
+                str += '<li class="item' + (num === 1 && i === 0 ? ' active' : '') + '">\n                    <a href="' + (d.url ? d.url : 'javascript:;') + '" target="_blank"><img src="' + d.pic + '"/></a>\n                    <div class="date">' + d.date + '</div>\n                    <div class="info">\n                        <div class="name">' + d.name + '</div>\n                        <div class="desc">' + d.des + '</div>\n                        <a href="/edit?id=' + d.id + '&owner=' + d.owner + '">\u7F16\u8F91</a>\n                        <a class="to-del" data-name="' + d.name + '" data-id="' + d.id + '">\u5220\u9664</a>\n                        <i class="browsenum"  data-id="' + d.id + '">\u6D4F\u89C8\u91CF</i>\n                    </div>\n                </li>';
             }
             $('#applist').html(str);
             // 设置分页
@@ -7425,15 +7487,25 @@ function initPage(num) {
             });
         }
     });
+} //分页
+// object 变成 style top:10px; left: 20px; // ... 
+
+
+function browsenum() {
+    $(document).on('click', '.browsenum', function () {
+        var _this = this;
+
+        var id = $(this).attr('data-id');
+        (0, _ajax.checkBrowsenum)({ app_id: id }).done(function (res) {
+            if (res.success) {
+                var num = res.data.length;
+                $(_this).context.innerHTML = num;
+            }
+        });
+    });
 }
 
 // 删除
-//
-
-// object 变成 style top:10px; left: 20px; // ... 
-/**
- * 案例
-*/
 function delPage() {
     $(document).on('click', '.to-del', function () {
         var id = $(this).attr('data-id');
@@ -7535,6 +7607,7 @@ $(function () {
     initPage(1, 19);
     addNewPage();
     delPage();
+    browsenum();
 
     $('.pagelist').on('page', function (e, obj) {
         console.log(obj);
